@@ -1606,7 +1606,7 @@
                                 <span style="color: #15803d !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase;">Autenticado</span>
                             </div>
                         </div>
-                        <div style="display: flex !important; align-items: center !important; gap: 8px !important; margin-top: 4px !important;"><span style="background-color: #0054a6 !important; color: #ffffff !important; font-size: 10px !important; font-weight: 800 !important; padding: 3px 10px !important; border-radius: 6px !important; text-transform: uppercase;">Boleto</span><span style="color: #64748b !important; font-size: 11px !important; font-weight: 500;">Aprovação imediata</span></div>
+                        <div style="display: flex !important; align-items: center !important; gap: 8px !important; margin-top: 4px !important;"><span style="background-color: #0054a6 !important; color: #ffffff !important; font-size: 10px !important; font-weight: 800 !important; padding: 3px 10px !important; border-radius: 6px !important; text-transform: uppercase;">Boleto</span><span style="color: #64748b !important; font-size: 11px !important; font-weight: 500;">Aprovação imediata e desconto garantido</span></div>
                     </div>
                 </div>
             </div>
@@ -1614,7 +1614,7 @@
             <div class="pix-instructions-list">
                 <ul>
                     <li><i class="fas fa-mobile-alt"></i><span>Acesse o App do seu banco.</span></li>
-                    <li><i class="fas fa-qrcode"></i><span>Selecione "Pagar Boleto" ou "Digitar Código de Barras".</span></li>
+                    <li><i class="fas fa-qrcode"></i><span>Selecione "Pagar Boleto".</span></li>
                     <li><i class="fas fa-paste"></i><span>Cole o código e finalize.</span></li>
                 </ul>
             </div>
@@ -1837,7 +1837,7 @@
                 navigator.clipboard.writeText(code).then(() => {
                     const btn = document.getElementById('btn-copy-again');
                     const originalText = btn.innerText;
-                    btn.innerText = 'Copiado!';
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
                     setTimeout(() => { btn.innerText = originalText; }, 2000);
                 });
             }
