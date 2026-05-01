@@ -1620,16 +1620,14 @@
     </div>
 
     <!-- ORIGINAL PIX COPIED MODAL FROM pasted_content_3 -->
-    <!-- Modal de "Código Pix Copiado" Compacto -->
-<div id="pixCopiedModal" class="pix-modal-overlay">
-    <div class="pix-modal-content">
-        <button class="pix-modal-external-close" onclick="fecharPixModalDireto()">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="pix-modal-header">
-            <i class="fas fa-check-circle"></i>
-            <h2>Código Pix Copiado!</h2>
-            <div>
+    <div class="pix-modal-overlay" id="pix-copied-modal">
+        <div class="pix-modal-content">
+            <button class="pix-modal-close-x" id="btn-close-pix-modal" title="Fechar"><i class="fas fa-times"></i></button>
+            <div class="pix-modal-header">
+                <i class="fas fa-check-circle" style="display: block !important; margin: 0 auto 16px auto !important; color: #16a34a; font-size: 42px;"></i>
+                <h2 style="margin: 0 0 8px 0 !important; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important; color: #1e293b !important; font-weight: 700 !important; font-size: 20px;">Boleto Copiado!</h2>
+
+    <div>
     Agora siga as instruções abaixo para concluir o pagamento
 </div>
         </div>
@@ -1643,20 +1641,19 @@
             </ul>
         </div>
 
+            <div class="pix-code-container-compact">
+                <input type="text" id="pixCodeCopied" class="pix-code-input-compact" readonly>
+                <button class="pix-copy-btn-compact" id="btn-copy-again">Copiar Novamente</button>
+            </div>
 
-        <div class="pix-code-container-compact">
-            <input type="text" id="pixCodeCopied" class="pix-code-input-compact" readonly>
-            <button class="pix-copy-btn-compact" onclick="copyAgain()">Copiar Novamente</button>
+            <div class="payment-status-compact">
+                <div class="compact-spinner"></div>
+                <span>Aguardando pagamento...</span>
+            </div>
+
+            <button class="pix-modal-close-compact" id="btn-entendi">ENTENDI, VOU PAGAR</button>
         </div>
-
-        <div class="payment-status-compact">
-            <div class="compact-spinner"></div>
-            <span>Aguardando pagamento...</span>
-        </div>
-
-        <button class="pix-modal-close-compact" onclick="fecharPixModal(this)">ENTENDI, VOU PAGAR</button>
     </div>
-</div>
 
     <script>
          
