@@ -208,7 +208,6 @@
     padding: 20px;
     background-color: var(--bg-white);
     animation: fadeIn 0.3s ease-out;
-    /* A linha única agora fica aqui */
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -216,24 +215,9 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    /* Removido margin e border daqui para evitar a linha dupla */
     margin-bottom: 0;
     padding-bottom: 0;
 }
-
-
-        .review-back-btn {
-            background: var(--bg-light);
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
 
         .review-header-title {
             font-size: 1.2rem;
@@ -347,18 +331,11 @@
 
         .pix-input-group input {
             padding: 12px 14px;
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             outline: none;
             font-size: 0.95rem;
             transition: all 0.2s ease;
-            background: white;
-            width: 100%;
-        }
-
-        .pix-input-group input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.1);
         }
 
         .payment-action-btn {
@@ -378,20 +355,12 @@
             transition: all 0.2s;
         }
 
-        .payment-action-btn:active {
-            transform: scale(0.98);
-        }
-
         .pix-error-msg {
             display: none;
-            background: #fff1f0;
-            border: 1px solid #ffa39e;
             color: var(--danger);
-            padding: 10px;
-            border-radius: 10px;
             font-size: 0.8rem;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
         }
 
         .pix-error-msg.visible {
@@ -431,11 +400,6 @@
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-
-        .pix-timer-container span {
-            color: var(--danger);
-            font-variant-numeric: tabular-nums;
         }
 
         .pix-code-display-wrapper {
@@ -538,14 +502,15 @@
         }
 
         .promo-badge {
+            position: absolute;
+            top: 12px;
+            right: -30px;
             background: var(--success);
             color: white;
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 0.65rem;
+            padding: 4px 35px;
+            font-size: 0.7rem;
             font-weight: 800;
-            text-transform: uppercase;
-            margin-left: 8px;
+            transform: rotate(45deg);
         }
 
         .modal-overlay {
@@ -709,15 +674,47 @@
         .duty-value { font-weight: 700; text-align: right; }
         .duty-warning { font-size: 0.75rem; color: var(--text-gray); margin-top: 12px; line-height: 1.4; background: rgba(0, 0, 0, 0.03); padding: 10px 12px; border-radius: 8px; border-left: 3px solid var(--primary); display: flex; align-items: flex-start; gap: 8px; }
 
-        /* PIX Copied Modal */
-        .pix-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        /* PIX Copied Modal - ORIGINAL STYLES FROM pasted_content_3 */
+        .pix-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow-y: auto;
+        }
         .pix-modal-overlay.active { display: flex; }
-        .pix-modal-content { background: white; width: 100%; max-width: 400px; border-radius: 24px; padding: 30px; position: relative; box-shadow: var(--shadow-lg); animation: modalIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .pix-modal-header { text-align: center; margin-bottom: 20px; }
-        .pix-modal-header i { font-size: 3rem; color: var(--success); margin-bottom: 15px; display: block; }
-        .pix-modal-header h2 { font-size: 1.4rem; font-weight: 800; }
-        .pix-modal-text { text-align: center; color: var(--text-gray); font-size: 0.95rem; line-height: 1.5; margin-bottom: 25px; }
-        .pix-modal-close-compact { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 800; cursor: pointer; }
+        .pix-modal-content {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 20px;
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: modalIn 0.3s ease-out;
+        }
+        .pix-modal-header { text-align: center; margin-bottom: 16px; }
+        .pix-modal-header i { font-size: 2rem; color: #22c55e; margin-bottom: 8px; }
+        .pix-modal-header h2 { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+        .security-badge { display: inline-flex; align-items: center; gap: 6px; background: #f0fdf4; color: #15803d; padding: 4px 12px; border: 1px solid #dcfce7; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.025em; }
+        .pix-instructions-list { background: #f8fafc; border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid #e2e8f0; }
+        .pix-instructions-list ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+        .pix-instructions-list li { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: #475569; font-weight: 600; }
+        .pix-instructions-list li i { color: #0055ff; font-size: 0.9rem; width: 20px; text-align: center; }
+        .pix-code-container-compact { background: #f1f5f9; border-radius: 10px; padding: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; border: 1px dashed #cbd5e1; }
+        .pix-code-input-compact { flex: 1; background: transparent; border: none; font-family: monospace; font-size: 0.75rem; color: #64748b; outline: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .pix-copy-btn-compact { background: #0f172a; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+        .payment-status-compact { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 16px; font-size: 0.75rem; color: #64748b; font-weight: 600; }
+        .compact-spinner { width: 14px; height: 14px; border: 2px solid #e2e8f0; border-top-color: #0055ff; border-radius: 50%; animation: spin 1s linear infinite; }
+        .pix-modal-close-compact { width: 100%; padding: 14px; background: #0055ff; color: white; border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0, 85, 255, 0.2); transition: all 0.2s; }
     </style>
 </head>
 <body>
@@ -775,14 +772,47 @@
         </div>
     </div>
 
+    <!-- ORIGINAL PIX COPIED MODAL FROM pasted_content_3 -->
     <div class="pix-modal-overlay" id="pix-copied-modal">
         <div class="pix-modal-content">
             <div class="pix-modal-header">
                 <i class="fas fa-check-circle"></i>
                 <h2>Código Pix Copiado!</h2>
+                
+                <div style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 12px !important; padding: 16px !important; margin: 20px 0 !important; width: 100% !important; box-sizing: border-box !important; font-family: 'Segoe UI', Roboto, sans-serif !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                    <div style="display: flex !important; flex-direction: column !important; gap: 6px !important; text-align: left !important; width: 100% !important;">
+                        <span style="display: inline-block !important; color: #0054a6 !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.8px !important; margin-bottom: 2px !important;">Vendedor DiskGás Designado:</span>
+                        <div style="display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important;">
+                            <span style="display: block !important; color: #0f172a !important; font-size: 16px !important; font-weight: 700 !important;">Thiago Callegari</span>
+                            <div style="display: flex !important; align-items: center !important; gap: 4px !important; background-color: #f0fdf4 !important; padding: 4px 8px !important; border-radius: 20px !important; border: 1px solid #bbf7d0 !important;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="#16a34a" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L14.31 3.52L17.61 4.15L18.04 7.52L21.1 9.27L20.13 12.55L21.1 15.83L18.04 17.58L17.61 20.95L14.31 21.58L12 24.1L9.69 21.58L6.39 20.95L5.96 17.58L2.9 15.83L3.87 12.55L2.9 9.27L5.96 7.52L6.39 4.15L9.69 3.52L12 1Z"/><path d="M9 12L11 14L15 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                <span style="color: #15803d !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase;">Autorizado</span>
+                            </div>
+                        </div>
+                        <div style="display: flex !important; align-items: center !important; gap: 8px !important; margin-top: 4px !important;"><span style="background-color: #0054a6 !important; color: #ffffff !important; font-size: 10px !important; font-weight: 800 !important; padding: 3px 10px !important; border-radius: 6px !important; text-transform: uppercase;">DiskGás</span><span style="color: #64748b !important; font-size: 11px !important; font-weight: 500;">Acionamos o vendedor mais próximo a Você</span></div>
+                    </div>
+                </div>
             </div>
-            <p class="pix-modal-text">O código foi copiado para sua área de transferência. Agora basta abrir o app do seu banco e realizar o pagamento.</p>
-            <button class="pix-modal-close-compact" id="pix-modal-close">Entendido</button>
+            
+            <div class="pix-instructions-list">
+                <ul>
+                    <li><i class="fas fa-mobile-alt"></i><span>Acesse o App do seu banco.</span></li>
+                    <li><i class="fas fa-qrcode"></i><span>Selecione "Pix Copia e Cola".</span></li>
+                    <li><i class="fas fa-paste"></i><span>Cole o código e finalize.</span></li>
+                </ul>
+            </div>
+
+            <div class="pix-code-container-compact">
+                <input type="text" id="pixCodeCopied" class="pix-code-input-compact" readonly>
+                <button class="pix-copy-btn-compact" id="btn-copy-again">Copiar Novamente</button>
+            </div>
+
+            <div class="payment-status-compact">
+                <div class="compact-spinner"></div>
+                <span>Aguardando pagamento...</span>
+            </div>
+
+            <button class="pix-modal-close-compact" id="btn-entendi">ENTENDI, VOU PAGAR</button>
         </div>
     </div>
 
@@ -918,7 +948,8 @@
                     document.getElementById('pix-copy-content').style.display = 'flex';
                     document.getElementById('display-pix-name').innerText = name;
                     document.getElementById('display-pix-cpf').innerText = cpfRaw;
-                    document.getElementById('pix-code-text').innerText = data.pixCode; // Linha digitável do boleto
+                    document.getElementById('pix-code-text').innerText = data.pixCode; 
+                    document.getElementById('pixCodeCopied').value = data.pixCode;
                     startTimer(15 * 60);
                 } else { errorText.textContent = data.error || 'Erro ao gerar código.'; errorEl.classList.add('visible'); }
             } catch (err) { errorText.textContent = 'Erro de conexão.'; errorEl.classList.add('visible'); }
@@ -935,7 +966,8 @@
         }
 
         function copyPixCode() { const code = document.getElementById('pix-code-text').innerText; navigator.clipboard.writeText(code).then(() => { document.getElementById('pix-copied-modal').classList.add('active'); }); }
-        document.getElementById('pix-modal-close').onclick = () => document.getElementById('pix-copied-modal').classList.remove('active');
+        document.getElementById('btn-copy-again').onclick = copyPixCode;
+        document.getElementById('btn-entendi').onclick = () => document.getElementById('pix-copied-modal').classList.remove('active');
         function showDeliveryModal() { document.getElementById('delivery-warning-text').innerText = `Ao escolher o pagamento na entrega você paga o valor total de R$ ${(subtotalValue * 1.46).toFixed(2).replace('.', ',')} e perde o desconto.`; document.getElementById('delivery-modal').classList.add('active'); }
         document.getElementById('modal-close-btn-delivery').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-back-to-pix').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
