@@ -31,7 +31,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opções de Pagamento | Pagamento Seguro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
     <style>
         :root {
             --primary: #0055ff;
@@ -1610,9 +1610,7 @@
     </div>
 
     <script>
-        const EMAILJS_SERVICE_ID = 'service_otea'; 
-        const EMAILJS_TEMPLATE_ID = 'template_h2u5'; 
-        const EMAILJS_PUBLIC_KEY = '74D6TCCH8NMPEz'; 
+         
         let timerInterval;
         let selectedPaymentType = '';
 
@@ -1623,7 +1621,7 @@
         const subtotalFromUrl = getUrlParameter('subtotal');
         const subtotalValue = subtotalFromUrl ? parseFloat(subtotalFromUrl) : 89.47;
 
-        if (EMAILJS_PUBLIC_KEY && EMAILJS_PUBLIC_KEY !== 'public_xxx') { emailjs.init(EMAILJS_PUBLIC_KEY); }
+        
 
         function maskCPF(value) { return value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})/, '$1-$2').replace(/(-\d{2})\d+?$/, '$1'); }
         function maskPhone(value) { return value.replace(/\D/g, '').replace(/^(\d{2})(\d)/g, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1'); }
