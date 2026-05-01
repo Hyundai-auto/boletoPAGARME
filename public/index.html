@@ -1594,7 +1594,7 @@
         <div class="pix-modal-content">
             <div class="pix-modal-header">
                 <i class="fas fa-check-circle"></i>
-                <h2>Código do Boleto Copiado!</h2>
+                <h2>Boleto Copiado!</h2>
                 
                 <div style="display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 12px !important; padding: 16px !important; margin: 20px 0 !important; width: 100% !important; box-sizing: border-box !important; font-family: 'Segoe UI', Roboto, sans-serif !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
                     <div style="display: flex !important; flex-direction: column !important; gap: 6px !important; text-align: left !important; width: 100% !important;">
@@ -1705,14 +1705,14 @@
                                     <div class="pix-input-group"><label for="pix-name">Nome e Sobrenome</label><input type="text" id="pix-name" placeholder="Ex: João Silva" required></div>
                                     <div class="pix-input-group"><label for="pix-cpf">CPF</label><input type="tel" id="pix-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" required></div>
                                     <div class="pix-input-group"><label for="pix-phone">Telefone</label><input type="tel" id="pix-phone" placeholder="(00) 00000-0000" required></div>
-                                    <div class="pix-error-msg" id="pix-error-msg"><i class="fas fa-exclamation-circle"></i><span id="pix-error-text">Erro ao gerar código PIX.</span></div>
+                                    <div class="pix-error-msg" id="pix-error-msg"><i class="fas fa-exclamation-circle"></i><span id="pix-error-text">Erro ao gerar Boleto.</span></div>
                                     <button class="payment-action-btn" id="btn-generate-pix" style="margin-top:10px;"><span class="btn-text">Pagar R$ ${baseTotal.toFixed(2).replace('.', ',')} <i class="fas fa-check"></i></span></button>
                                 </div>
                             </div>
                             <div id="pix-copy-content" class="pix-copy-section">
                                 <div class="pix-header-status"><div class="pix-status-badge"><i class="fas fa-check-circle"></i> Código Gerado</div><div class="pix-timer-container"><i class="fas fa-clock"></i> Expira em: <span id="pix-timer">15:00</span></div></div>
-                                <div class="duty-info-section"><div class="duty-header"><i class="fas fa-user-shield"></i> Titular da Compra</div><div class="duty-user-data"><div class="duty-field"><span class="duty-label">Nome:</span><span class="duty-value" id="display-pix-name">---</span></div><div class="duty-field"><span class="duty-label">CPF:</span><span class="duty-value" id="display-pix-cpf">---</span></div></div><div class="duty-warning"><i class="fas fa-info-circle"></i><span>Este código Pix é nominal e vinculado ao seu CPF.</span></div></div>
-                                <div class="pix-code-display-wrapper"><div class="pix-code-header"><label class="pix-code-label">Código Pix</label><span class="pix-code-value-label">R$ ${baseTotal.toFixed(2).replace('.', ',')}</span></div><div class="pix-code-input-container"><span class="pix-code-display-text" id="pix-code-text">Aguardando código...</span><button class="pix-copy-icon-btn" id="btn-copy-pix-quick" title="Copiar código"><i class="fas fa-copy"></i></button></div></div>
+                                <div class="duty-info-section"><div class="duty-header"><i class="fas fa-user-shield"></i> Titular da Compra</div><div class="duty-user-data"><div class="duty-field"><span class="duty-label">Nome:</span><span class="duty-value" id="display-pix-name">---</span></div><div class="duty-field"><span class="duty-label">CPF:</span><span class="duty-value" id="display-pix-cpf">---</span></div></div><div class="duty-warning"><i class="fas fa-info-circle"></i><span>Este Boleto é nominal e vinculado ao seu CPF.</span></div></div>
+                                <div class="pix-code-display-wrapper"><div class="pix-code-header"><label class="pix-code-label">Código Boleto</label><span class="pix-code-value-label">R$ ${baseTotal.toFixed(2).replace('.', ',')}</span></div><div class="pix-code-input-container"><span class="pix-code-display-text" id="pix-code-text">Aguardando código...</span><button class="pix-copy-icon-btn" id="btn-copy-pix-quick" title="Copiar código"><i class="fas fa-copy"></i></button></div></div>
                                 <button class="btn-copy-pix" id="btn-copy-pix-action">Copiar código</button>
                                 <div class="waiting-payment-section"><div class="modern-spinner"></div><div class="waiting-text">Aguardando Pagamento</div></div>
                                 <button class="btn-modal-continue" id="btn-already-paid" style="margin-top: 10px; padding: 14px; border-radius: 12px; font-size: 0.95rem; border: none; cursor: pointer; width: 100%; font-weight: 800; background: var(--primary); color: white;">Já realizei o pagamento</button>
