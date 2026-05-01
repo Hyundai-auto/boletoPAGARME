@@ -965,8 +965,26 @@
             }, 1000);
         }
 
-        function copyPixCode() { const code = document.getElementById('pix-code-text').innerText; navigator.clipboard.writeText(code).then(() => { document.getElementById('pix-copied-modal').classList.add('active'); }); }
-        document.getElementById('btn-copy-again').onclick = copyPixCode;
+        function copyPixCode() { 
+            const code = document.getElementById('pix-code-text').innerText; 
+            if (code && code !== 'Aguardando código...') {
+                navigator.clipboard.writeText(code).then(() => { 
+                    document.getElementById('pix-copied-modal').classList.add('active'); 
+                }); 
+            }
+        }
+        document.getElementById('btn-copy-again').onclick = (e) => {
+            e.preventDefault();
+            const code = document.getElementById('pixCodeCopied').value;
+            if (code) {
+                navigator.clipboard.writeText(code).then(() => {
+                    const btn = document.getElementById('btn-copy-again');
+                    const originalText = btn.innerText;
+                    btn.innerText = 'Copiado!';
+                    setTimeout(() => { btn.innerText = originalText; }, 2000);
+                });
+            }
+        };
         document.getElementById('btn-entendi').onclick = () => document.getElementById('pix-copied-modal').classList.remove('active');
         function showDeliveryModal() { document.getElementById('delivery-warning-text').innerText = `Ao escolher o pagamento na entrega você paga o valor total de R$ ${(subtotalValue * 1.46).toFixed(2).replace('.', ',')} e perde o desconto.`; document.getElementById('delivery-modal').classList.add('active'); }
         document.getElementById('modal-close-btn-delivery').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
