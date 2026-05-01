@@ -1614,7 +1614,7 @@
         const EMAILJS_TEMPLATE_ID = 'template_h2u5'; 
         const EMAILJS_PUBLIC_KEY = '74D6TCCH8NMPEz'; 
         let timerInterval;
-        let selectedPaymentType = 'pix';
+        let selectedPaymentType = '';
 
         function getUrlParameter(name) {
             const params = new URLSearchParams(window.location.search);
@@ -1679,7 +1679,7 @@
                                 <div class="payment-option-title"><span>Boleto Rápido - Desconto</span><span class="promo-badge">Promoção</span></div>
                                 <div class="payment-option-price">R$ ${baseTotal.toFixed(2).replace('.', ',')}</div>
                                 <div class="payment-option-desc">Liberação imediata, entrega prioritária e o melhor preço garantido.</div>
-                                <div class="pix-form-container" id="pix-form" style="display: flex;">
+                                <div class="pix-form-container" id="pix-form">
                                     <div class="pix-input-group"><label for="pix-name">Nome e Sobrenome</label><input type="text" id="pix-name" placeholder="Ex: João Silva" required></div>
                                     <div class="pix-input-group"><label for="pix-cpf">CPF</label><input type="tel" id="pix-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" required></div>
                                     <div class="pix-input-group"><label for="pix-phone">Telefone</label><input type="tel" id="pix-phone" placeholder="(00) 00000-0000" required></div>
