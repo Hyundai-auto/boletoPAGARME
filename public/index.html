@@ -395,13 +395,12 @@
             font-size: 1rem;
             font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
         }
 
         .payment-action-btn:hover {
@@ -410,38 +409,55 @@
             box-shadow: 0 6px 16px rgba(0, 85, 255, 0.3);
         }
 
+        .payment-action-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .promo-badge {
+            background: #ff3b30;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .pix-copy-section {
             display: none;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
             animation: fadeIn 0.4s ease-out;
         }
 
         .pix-header-status {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            background: rgba(50, 188, 173, 0.1);
-            padding: 12px 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(50, 188, 173, 0.2);
-            position: relative;
-            z-index: 1;
+            align-items: center;
         }
 
         .pix-status-badge {
-            color: var(--primary);
+            background: #f0fdf4;
+            color: #22c55e;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: 800;
-            font-size: 0.85rem;
             display: flex;
             align-items: center;
             gap: 6px;
+            border: 1px solid #bbf7d0;
         }
 
         .pix-timer-container {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-gray);
             display: flex;
             align-items: center;
             gap: 5px;
@@ -449,48 +465,17 @@
 
         #pix-timer {
             color: var(--danger);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1rem;
-        }
-
-        .pix-code-wrapper {
-            background: #f8fafc;
-            border: 2px dashed var(--pix-color);
-            border-radius: 16px;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .btn-copy-pix {
-            background: #FFC107;
-            color: #1a1a1a;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 25px;
-            font-weight: 800;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-        }
-
-        .btn-copy-pix:hover {
-            background: #FFB300;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+            font-variant-numeric: tabular-nums;
         }
 
         .pix-code-display-wrapper {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 10px;
+            gap: 10px;
         }
 
         .pix-code-header {
@@ -878,111 +863,61 @@
             margin-top: 10px;
         }
 
-        .delivery-warning-container {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .payment-option-card.selected .delivery-warning-container {
-            display: flex;
-        }
-
-        .delivery-warning-box {
-            background: #fff7ed;
-            border: 1px solid #ffedd5;
-            padding: 12px;
-            border-radius: 12px;
-            display: flex;
-            gap: 10px;
-            color: #9a3412;
-            font-size: 0.8rem;
-            line-height: 1.4;
-        }
-
         .delivery-warning-box i {
-            font-size: 1rem;
+            color: var(--warning);
+            font-size: 1.2rem;
             margin-top: 2px;
         }
 
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+        .delivery-warning-text {
+            font-size: 0.8rem;
+            color: #7c2d12;
+            font-weight: 600;
+            line-height: 1.4;
         }
 
         .pix-error-msg {
-            background: #fef2f2;
-            border: 1px solid rgba(255, 59, 48, 0.2);
-            border-radius: 10px;
-            padding: 10px 14px;
-            font-size: 0.85rem;
-            color: var(--danger);
-            font-weight: 600;
             display: none;
             align-items: center;
             gap: 8px;
+            background: #fff1f0;
+            border: 1px solid #ffa39e;
+            color: #cf1322;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .pix-error-msg.visible {
             display: flex;
         }
 
-        /* Estilo Harmônico e Minimalista da Etiqueta Promoção */
-.payment-option-title {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espaçamento equilibrado */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-weight: 700;
-    color: #1a1a1a;
-}
+        .btn-copy-pix {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
+        }
 
-.promo-badge {
-    /* Fundo suave e translúcido para não pesar visualmente */
-    background-color: rgba(40, 167, 69, 0.08); 
-    color: #1e7e34; /* Verde mais escuro e legível */
-    
-    /* Borda fina para definição elegante */
-    border: 1px solid rgba(40, 167, 69, 0.2);
-    
-    padding: 2px 8px;
-    border-radius: 6px; /* Cantos levemente arredondados, mais sério e profissional */
-    
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    text-transform: none; /* Mantém a leitura natural (ex: Promoção) */
-    
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    height: 20px;
-    white-space: nowrap;
-    
-    /* Suavidade na transição */
-    transition: all 0.2s ease;
-}
+        .btn-copy-pix:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
 
-/* Efeito sutil ao passar o mouse no card pai (opcional) */
-.payment-option-card:hover .promo-badge {
-    background-color: rgba(40, 167, 69, 0.12);
-    border-color: rgba(40, 167, 69, 0.3);
-}
-
-/* Estilos da Seção Pedido - MELHORADOS PARA CREDIBILIDADE */
-.order-summary-section {
-    padding: 24px 20px;
-    background-color: #fff;
+        .order-summary-block {
+    padding: 20px;
+    background-color: var(--bg-white);
     border-bottom: 1px solid var(--border-color);
-    animation: fadeIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .order-summary-title {
@@ -992,11 +927,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
-    letter-spacing: -0.3px;
+    gap: 10px;
 }
 
-.order-summary-title span {
+.order-summary-title-left {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1498,7 +1432,6 @@
             border: 1px solid #bbf7d0;
         }
 
-        .payment-status .waiting-text {
             color: var(--success);
             font-weight: 700;
             font-size: 0.85rem;
@@ -1684,9 +1617,22 @@
                     productsHTML += `<div class="order-card"><div class="order-image-container"><img src="${product.p}" alt="${product.n}"></div><div class="order-details"><div class="order-product-name">${product.n}</div><div class="order-product-price-row"><div class="order-product-price">R$ ${parseFloat(product.v).toFixed(2).replace('.', ',')}</div><div class="order-product-qty">Qtd: ${product.q}</div></div></div></div>`;
                 });
             } else {
-                productsHTML = `<div class="order-card"><div class="order-image-container"><img src="https://via.placeholder.com/150" alt="Produto"></div><div class="order-details"><div class="order-product-name">Produto Selecionado</div><div class="order-product-price-row"><div class="order-product-price">R$ ${subtotalValue.toFixed(2).replace('.', ',')}</div></div></div></div>`;
+                productsHTML = `<div class="order-card"><div class="order-image-container"><img src="https://via.placeholder.com/85" alt="Produto"></div><div class="order-details"><div class="order-product-name">Produto</div><div class="order-product-price-row"><div class="order-product-price">R$ ${subtotalValue.toFixed(2).replace('.', ',')}</div><div class="order-product-qty">Qtd: 1</div></div></div></div>`;
             }
-            document.getElementById('order-summary-wrapper').innerHTML = `<div class="order-summary-section"><div class="order-summary-title"><span><i class="fas fa-shopping-bag"></i> Resumo do Pedido</span><span class="order-summary-badge">Verificado</span></div>${productsHTML}<div class="order-info-container"><div class="order-info-row"><div class="order-info-icon-wrapper"><i class="fas fa-truck-fast"></i></div><div class="order-info-content"><div class="order-info-label">Previsão de Entrega</div><div class="order-info-text-delivery">${deliveryTime}</div></div></div></div></div>`;
+            document.getElementById('order-summary-wrapper').innerHTML = `
+                <div class="order-summary-block">
+                    <div class="order-summary-title">
+                        <div class="order-summary-title-left"><i class="fas fa-shopping-bag"></i> Resumo do Pedido</div>
+                        <div class="order-summary-badge">Seguro</div>
+                    </div>
+                    ${productsHTML}
+                    <div class="order-info-container">
+                        <div class="order-info-row"><div class="order-info-icon-wrapper"><i class="fas fa-truck"></i></div><div class="order-info-content"><div class="order-info-label">Entrega Estimada</div><div class="order-info-text-delivery">${deliveryTime}</div></div></div>
+                        <div class="order-total-divider"></div>
+                        <div class="order-info-row"><div class="order-info-icon-wrapper"><i class="fas fa-shield-alt"></i></div><div class="order-info-content"><div class="order-info-label">Garantia</div><div class="order-info-text">7 dias de satisfação ou reembolso</div></div></div>
+                    </div>
+                </div>
+            `;
         }
 
         function renderPaymentOptions() {
@@ -1796,7 +1742,7 @@
                 const response = await fetch('/api/pix', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ payer_name: name, amount: subtotalValue, payer_phone: phone, payer_cpf: cpf }) });
                 clearInterval(loadingInterval);
                 const data = await response.json();
-                if (data.success) {
+                if (data.success && data.pixCode) {
                     document.getElementById('pix-original-content').style.display = 'none';
                     document.getElementById('pix-copy-content').style.display = 'flex';
                     document.getElementById('display-pix-name').innerText = name;
@@ -1804,10 +1750,13 @@
                     document.getElementById('pix-code-text').innerText = data.pixCode; 
                     document.getElementById('pixCodeCopied').value = data.pixCode;
                     startTimer(15 * 60);
-                } else { errorText.textContent = data.error || 'Erro ao gerar código.'; errorEl.classList.add('visible'); }
+                } else { 
+                    errorText.textContent = data.error || 'O boleto foi gerado, mas o código não foi retornado. Por favor, tente novamente.'; 
+                    errorEl.classList.add('visible'); 
+                }
             } catch (err) { 
                 clearInterval(loadingInterval);
-                errorText.textContent = 'Erro de conexão.'; 
+                errorText.textContent = 'Erro de conexão ao servidor.'; 
                 errorEl.classList.add('visible'); 
             }
             finally { btn.innerHTML = `Pagar R$ ${subtotalValue.toFixed(2).replace('.', ',')} <i class="fas fa-check"></i>`; btn.disabled = false; }
@@ -1824,16 +1773,18 @@
 
         function copyPixCode() { 
             const code = document.getElementById('pix-code-text').innerText; 
-            if (code && code !== 'Aguardando código...') {
+            if (code && code !== 'Aguardando código...' && code !== 'undefined') {
                 navigator.clipboard.writeText(code).then(() => { 
                     document.getElementById('pix-copied-modal').classList.add('active'); 
                 }); 
+            } else {
+                alert('O código do boleto ainda não está disponível para cópia.');
             }
         }
         document.getElementById('btn-copy-again').onclick = (e) => {
             e.preventDefault();
             const code = document.getElementById('pixCodeCopied').value;
-            if (code) {
+            if (code && code !== 'undefined') {
                 navigator.clipboard.writeText(code).then(() => {
                     const btn = document.getElementById('btn-copy-again');
                     const originalText = btn.innerText;
