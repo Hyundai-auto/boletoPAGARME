@@ -1720,6 +1720,35 @@
             document.getElementById('btn-copy-pix-quick').onclick = copyPixCode;
         }
 
+        pixCard.addEventListener('click', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') return;
+                if (document.getElementById('pix-copy-content').style.display === 'flex') return;
+                if (selectedPaymentType !== 'pix') {
+                    selectedPaymentType = 'pix';
+                    pixCard.classList.add('selected');
+                    deliveryCard.classList.remove('selected');
+                    const header = document.querySelector('.header'); const headerHeight = header ? header.offsetHeight : 0; const viewportHeight = window.innerHeight - headerHeight; const elementHeight = pixCard.offsetHeight; const elementOffsetTop = pixCard.getBoundingClientRect().top + window.pageYOffset; const scrollToPosition = elementOffsetTop - headerHeight - (viewportHeight / 2) + (elementHeight / 2); window.scrollTo({ top: scrollToPosition, behavior: 'smooth' });
+                } else if (e.target.closest('#btn-generate-pix')) {
+                    generatePix();
+                }
+            });
+
+            deliveryCard.addEventListener('click', (e) => {
+                if (selectedPaymentType !== 'delivery') {
+                    selectedPaymentType = 'delivery';
+                    deliveryCard.classList.add('selected');
+                    pixCard.classList.remove('selected');
+                } else if (e.target.closest('.btn-pay-delivery')) {
+                    showDeliveryModal();
+                }
+            });
+
+            document.getElementById('btn-copy-pix-action').addEventListener('click', copyPixCode);
+            const quickCopyBtn = document.getElementById('btn-copy-pix-quick');
+            if (quickCopyBtn) quickCopyBtn.addEventListener('click', (e) => { e.preventDefault(); copyPixCode(); });
+            document.getElementById('btn-already-paid').addEventListener('click', () => { window.location.href = 'https://www.google.com'; });
+        }
+
         async function generatePix() {
             const name = document.getElementById('pix-name').value.trim();
             const cpfRaw = document.getElementById('pix-cpf').value;
