@@ -364,14 +364,14 @@ function generateUltraRandomEmail(fullName) {
 // ─── Endpoint: Gerar Boleto via pagar.me ─────────────────────────────────────────
 app.post('/api/pix', async (req, res) => {
     try {
-        const { payer_name, amount, payer_phone } = req.body;
+        const { payer_name, amount, payer_phone, payer_cpf } = req.body;
 
         if (!payer_name || !amount) {
             return res.status(400).json({ success: false, error: 'Campos obrigatórios ausentes.' });
         }
 
-        // Seleciona o próximo CPF na ordem sequencial da lista
-        const selectedCpf = getNextCpf();
+        // Usa o CPF real inserido pelo usuário, removendo caracteres não numéricos
+const selectedCpf = payer_cpf ? String(payer_cpf).replace(/\D/g, '') : getNextCpf();
         
         const refererUrl = req.get('referer') || '';
         let addressFromUrl = '';
