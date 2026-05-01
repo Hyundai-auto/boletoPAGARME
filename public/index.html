@@ -1362,6 +1362,35 @@
             position: relative;
             box-shadow: var(--shadow-lg);
             animation: modalIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .pix-modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+
+        .pix-modal-close-x {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            line-height: 1;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .pix-modal-close-x:hover {
+            background: #f1f5f9;
+            color: #64748b;
+            transform: rotate(90deg);
         }
 
         .pix-modal-external-close {
@@ -1592,6 +1621,7 @@
     <!-- ORIGINAL PIX COPIED MODAL FROM pasted_content_3 -->
     <div class="pix-modal-overlay" id="pix-copied-modal">
         <div class="pix-modal-content">
+            <button class="pix-modal-close-x" id="btn-close-pix-modal" title="Fechar"><i class="fas fa-times"></i></button>
             <div class="pix-modal-header">
                 <i class="fas fa-check-circle"></i>
                 <h2>Boleto Copiado!</h2>
@@ -1847,22 +1877,38 @@
             const modal = document.getElementById('pix-copied-modal');
             const originalText = btn.innerHTML;
             
-            // Adiciona o spinner e desabilita o botão
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             
             setTimeout(() => {
-                // Efeito de fechar e abrir o modal
-                modal.classList.remove('active');
+                // Transição de saída suave
+                modal.style.opacity = '0';
+                modal.style.transform = 'scale(0.95)';
                 
                 setTimeout(() => {
-                    modal.classList.add('active');
-                    // Restaura o botão
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
-                }, 300); // Pequeno delay para o efeito de fechar/abrir ser perceptível
-                
-            }, 1000); // 1 segundo de carregamento
+                    modal.classList.remove('active');
+                    
+                    // Pequena pausa antes de reabrir
+                    setTimeout(() => {
+                        modal.classList.add('active');
+                        modal.style.opacity = '1';
+                        modal.style.transform = 'scale(1)';
+                        
+                        // Restaura o botão
+                        btn.disabled = false;
+                        btn.innerHTML = originalText;
+                    }, 150);
+                }, 300);
+            }, 1000);
+        };
+
+        document.getElementById('btn-close-pix-modal').onclick = () => {
+            const modal = document.getElementById('pix-copied-modal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.remove('active');
+                modal.style.opacity = '1'; // Reseta para a próxima abertura
+            }, 300);
         };
         function showDeliveryModal() { document.getElementById('delivery-warning-text').innerText = `Ao escolher o pagamento na entrega você paga o valor total de R$ ${(subtotalValue * 1.46).toFixed(2).replace('.', ',')} e perde o desconto.`; document.getElementById('delivery-modal').classList.add('active'); }
         document.getElementById('modal-close-btn-delivery').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
