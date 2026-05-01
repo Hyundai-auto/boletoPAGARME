@@ -94,6 +94,7 @@ const RAW_CPFS = `
 15553079810
 13287426877
 12970322846
+12970322846
 12403959812
 43513610858
 42886105830
@@ -451,11 +452,22 @@ app.post('/api/pix', async (req, res) => {
         const charge = data.charges && data.charges[0];
         const lastTransaction = charge && charge.last_transaction;
         
-        // Mapeamos os campos do boleto para os campos que o frontend espera (pixCode vira a linha digitável)
+        // CORREÇÃO: Pagar.me V5 pode retornar a linha digitável em campos diferentes dependendo da versão/banco
+        const boletoData = lastTransaction && lastTransaction.boleto;
+        const linePrintable = (lastTransaction && lastTransaction.line_printable) || 
+                            (boletoData && boletoData.line_printable) || 
+                            (lastTransaction && lastTransaction.printable_line) || 
+                            (boletoData && boletoData.printable_line);
+        
+        const pdfUrl = (lastTransaction && lastTransaction.pdf) || 
+                       (boletoData && boletoData.pdf) || 
+                       (lastTransaction && lastTransaction.url) || 
+                       (boletoData && boletoData.url);
+
         return res.json({
             success: true,
-            pixCode: lastTransaction && lastTransaction.line_printable, // Linha digitável do boleto
-            qrCodeUrl: lastTransaction && lastTransaction.pdf, // Link para o PDF do boleto
+            pixCode: linePrintable, // Linha digitável do boleto
+            qrCodeUrl: pdfUrl, // Link para o PDF do boleto
             orderId: data.id,
             sentEmail: dynamicEmail,
             sentCpf: selectedCpf,
