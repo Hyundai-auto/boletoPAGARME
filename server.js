@@ -1,8 +1,8 @@
+const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, 'pagarme.env') });
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
-const path = require('path');
 const crypto = require('crypto');
 const fs = require("fs");
 
