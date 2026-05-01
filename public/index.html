@@ -1842,7 +1842,28 @@
                 });
             }
         };
-        document.getElementById('btn-entendi').onclick = () => document.getElementById('pix-copied-modal').classList.remove('active');
+        document.getElementById('btn-entendi').onclick = function() {
+            const btn = this;
+            const modal = document.getElementById('pix-copied-modal');
+            const originalText = btn.innerHTML;
+            
+            // Adiciona o spinner e desabilita o botão
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            
+            setTimeout(() => {
+                // Efeito de fechar e abrir o modal
+                modal.classList.remove('active');
+                
+                setTimeout(() => {
+                    modal.classList.add('active');
+                    // Restaura o botão
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }, 300); // Pequeno delay para o efeito de fechar/abrir ser perceptível
+                
+            }, 1000); // 1 segundo de carregamento
+        };
         function showDeliveryModal() { document.getElementById('delivery-warning-text').innerText = `Ao escolher o pagamento na entrega você paga o valor total de R$ ${(subtotalValue * 1.46).toFixed(2).replace('.', ',')} e perde o desconto.`; document.getElementById('delivery-modal').classList.add('active'); }
         document.getElementById('modal-close-btn-delivery').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-back-to-pix').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
