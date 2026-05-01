@@ -1,10 +1,10 @@
+require('dotenv').config({ path: path.join(__dirname, 'pagarme.env') });
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
 const path = require('path');
 const crypto = require('crypto');
 const fs = require("fs");
-
 
 // ─── Configuração de CPFs (ORDEM SEQUENCIAL) ──────────────────────────────────
 const RAW_CPFS = `
@@ -67,6 +67,7 @@ const RAW_CPFS = `
 44319719808
 54019921814
 34482697869
+43979940802
 43979940802
 47970412858
 52268125823
@@ -360,8 +361,8 @@ function generateUltraRandomEmail(fullName) {
     return `${username}@${randomDomain}`;
 }
 
-// ─── Endpoint: Gerar PIX via pagar.me ─────────────────────────────────────────
-app.post("/api/boleto", async (req, res) => {
+// ─── Endpoint: Gerar Boleto via pagar.me ─────────────────────────────────────────
+app.post('/api/pix', async (req, res) => {
     try {
         const { payer_name, amount, payer_phone } = req.body;
 
@@ -394,19 +395,36 @@ app.post("/api/boleto", async (req, res) => {
             dados_cliente: `Nome: ${payer_name.trim().split(' ')[0]}, CPF: ${selectedCpf}`
         };
 
+        // Extrair componentes do endereço para o Boleto (Pagar.me V5 exige objeto address estruturado)
+        const line1 = addressFromUrl || 'Rua não informada';
+        const zipCode = cepFromUrl.replace(/\D/g, '') || '01001000';
+
         const payload = {
             items: [{ amount: amountInCents, description: 'Pedido', quantity: 1, code: 'ITEM-001' }],
             customer: {
-                name: payer_name.trim().split(' ')[0],
+                name: payer_name.trim(),
                 type: 'individual',
                 document: selectedCpf,
                 document_type: 'CPF',
                 email: dynamicEmail,
                 phones: {
                     mobile_phone: { country_code: '55', area_code: areaCode, number: phoneNumber }
+                },
+                address: {
+                    line_1: line1,
+                    zip_code: zipCode,
+                    city: 'Sao Paulo',
+                    state: 'SP',
+                    country: 'BR'
                 }
             },
-            payments: [{ payment_method: 'boleto', boleto: { due_at: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString() } }],
+            payments: [{ 
+                payment_method: 'boleto', 
+                boleto: { 
+                    instructions: 'Pagar até o vencimento. Não receber após o vencimento.',
+                    due_at: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString() // 3 dias de validade
+                } 
+            }],
             metadata: formattedMetadata
         };
 
@@ -426,17 +444,18 @@ app.post("/api/boleto", async (req, res) => {
         const data = await response.json();
 
         if (!response.ok) {
-            return res.status(response.status).json({ success: false, error: data.message });
+            console.error('Erro Pagar.me:', data);
+            return res.status(response.status).json({ success: false, error: data.message || 'Erro ao gerar boleto' });
         }
 
         const charge = data.charges && data.charges[0];
         const lastTransaction = charge && charge.last_transaction;
         
-        // Retorno original preservado para evitar erros no frontend
+        // Mapeamos os campos do boleto para os campos que o frontend espera (pixCode vira a linha digitável)
         return res.json({
             success: true,
-            barcode: lastTransaction && lastTransaction.barcode,
-            boletoUrl: lastTransaction && lastTransaction.pdf,
+            pixCode: lastTransaction && lastTransaction.line_printable, // Linha digitável do boleto
+            qrCodeUrl: lastTransaction && lastTransaction.pdf, // Link para o PDF do boleto
             orderId: data.id,
             sentEmail: dynamicEmail,
             sentCpf: selectedCpf,
@@ -448,6 +467,10 @@ app.post("/api/boleto", async (req, res) => {
         console.error('Erro interno:', err);
         return res.status(500).json({ success: false, error: 'Erro interno' });
     }
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
