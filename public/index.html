@@ -1905,25 +1905,21 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             
             setTimeout(() => {
-                // Transição de saída suave
-                modal.style.opacity = '0';
-                modal.style.transform = 'scale(0.95)';
+                // Efeito de piscada rápida (fechar e abrir)
+                document.body.style.transition = 'opacity 0.1s ease';
+                document.body.style.opacity = '0';
                 
                 setTimeout(() => {
                     modal.classList.remove('active');
+                    document.body.style.opacity = '1';
                     
-                    // Pequena pausa antes de reabrir
                     setTimeout(() => {
                         modal.classList.add('active');
-                        modal.style.opacity = '1';
-                        modal.style.transform = 'scale(1)';
-                        
-                        // Restaura o botão
                         btn.disabled = false;
                         btn.innerHTML = originalText;
-                    }, 150);
-                }, 300);
-            }, 1000);
+                    }, 50);
+                }, 100);
+            }, 800);
         };
 
         document.getElementById('btn-close-pix-modal').onclick = () => {
