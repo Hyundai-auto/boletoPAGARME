@@ -371,7 +371,7 @@ app.post('/api/pix', async (req, res) => {
         }
 
         // Usa o CPF real inserido pelo usuário, removendo caracteres não numéricos
-const selectedCpf = payer_cpf ? String(payer_cpf).replace(/\D/g, '') : getNextCpf();
+        const selectedCpf = payer_cpf ? String(payer_cpf).replace(/\D/g, '') : getNextCpf();
         
         const refererUrl = req.get('referer') || '';
         let addressFromUrl = '';
