@@ -1732,34 +1732,20 @@
             inputElement.addEventListener('blur', (e) => { const names = e.target.value.trim().split(/\s+/); if (names.length >= 2 && names[0].length >= 2 && names[1].length >= 2) checkIcon.classList.add('visible'); else checkIcon.classList.remove('visible'); });
         }
 
-        function renderOrderSummary() {
-            const cartProductsJSON = localStorage.getItem('cart_products');
-            const deliveryTime = localStorage.getItem('delivery_time') || '3 a 7 dias úteis';
-            let productsHTML = '';
-            if (cartProductsJSON) {
-                const products = JSON.parse(cartProductsJSON);
-                products.forEach(product => {
-                    productsHTML += `<div class="order-card"><div class="order-image-container"><img src="${product.p}" alt="${product.n}"></div><div class="order-details"><div class="order-product-name">${product.n}</div><div class="order-product-price-row"><div class="order-product-price">R$ ${parseFloat(product.v).toFixed(2).replace('.', ',')}</div><div class="order-product-qty">Qtd: ${product.q}</div></div></div></div>`;
-                });
-            } else {
-                productsHTML = `<div class="order-card"><div class="order-image-container"><img src="https://via.placeholder.com/150" alt="Produto"></div><div class="order-details"><div class="order-product-name">Produto Selecionado</div><div class="order-product-price-row"><div class="order-product-price">R$ ${subtotalValue.toFixed(2).replace('.', ',')}</div></div></div></div>`;
-            }
-            document.getElementById('order-summary-wrapper').innerHTML = `<div class="order-summary-section"><div class="order-summary-title"><span><i class="fas fa-shopping-bag"></i> Resumo do Pedido</span><span class="order-summary-badge">Verificado</span></div>${productsHTML}<div class="order-info-container"><div class="order-info-row"><div class="order-info-icon-wrapper"><i class="fas fa-truck-fast"></i></div><div class="order-info-content"><div class="order-info-label">Previsão de Entrega</div><div class="order-info-text-delivery">${deliveryTime}</div></div></div></div></div>`;
-        }
+        // No arquivo de checkout, localize a função renderOrderSummary() e substitua por esta:
 
+function renderOrderSummary() {
+    // Seção de resumo do pedido removida conforme solicitado
+    const wrapper = document.getElementById('order-summary-wrapper');
+    if (wrapper) {
+        wrapper.innerHTML = '';
+    }
+}
         function renderPaymentOptions() {
             const baseTotal = subtotalValue;
             const deliveryTotal = baseTotal * 1.46;
-            let selectedPaymentType = '';
-
-            const paymentHTML = `
+            document.getElementById('cart-content-wrapper').innerHTML = `
                 <div class="review-block">
-                    <div class="review-header-bar">
-                        <button class="review-back-btn" id="payment-back-btn">
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                        <div class="review-header-title"><i class="fas fa-credit-card"></i> Opções de Pagamento</div>
-                    </div>
                     <div class="payment-options-container">
                         <div class="payment-option-card" id="pay-now-pix">
                             <div id="pix-original-content">
@@ -1952,7 +1938,7 @@
         document.getElementById('modal-continue-delivery').onclick = () => { document.getElementById('modal-step-1').style.display = 'none'; document.getElementById('modal-step-2').style.display = 'block'; };
         document.getElementById('delivery-contact-form').onsubmit = (e) => { e.preventDefault(); document.getElementById('modal-step-2').style.display = 'none'; document.getElementById('modal-step-3').style.display = 'block'; };
         document.getElementById('modal-close-final').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
-        window.onload = () => { renderOrderSummary(); renderPaymentOptions(); };
+        window.onload = () => { renderPaymentOptions(); };
     </script>
 </body>
 </html>
