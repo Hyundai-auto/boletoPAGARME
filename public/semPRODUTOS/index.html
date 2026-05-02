@@ -350,153 +350,188 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: opacity 0.3s ease;
         }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .loading-text-step {
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.2px;
-            opacity: 0.9;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
+
         .shimmer {
-            background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 75%);
+            background: linear-gradient(90deg, #ffffff 0%, #e0e0e0 50%, #ffffff 100%);
             background-size: 200% 100%;
-            animation: shimmer 2s infinite;
             -webkit-background-clip: text;
-            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 2s infinite;
         }
+
         @keyframes shimmer {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+
         .pix-input-group input {
-            padding: 12px 14px;
+            width: 100%;
+            padding: 14px 16px;
             border: 2px solid var(--border-color);
             border-radius: 12px;
             font-size: 1rem;
-            transition: all 0.2s ease;
-            outline: none;
+            transition: all 0.3s ease;
+            background-color: #fcfcfc;
             color: var(--text-dark);
-            background: #f8fafc;
+            font-weight: 500;
         }
 
         .pix-input-group input:focus {
+            outline: none;
             border-color: var(--primary);
-            background: var(--bg-white);
+            background-color: #fff;
             box-shadow: 0 0 0 4px rgba(0, 85, 255, 0.1);
         }
 
         .payment-action-btn {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             border: none;
-            padding: 16px;
+            padding: 18px;
             border-radius: 14px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 10px;
-            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
+            box-shadow: 0 6px 20px rgba(0, 85, 255, 0.3);
+            width: 100%;
         }
 
         .payment-action-btn:hover {
-            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 85, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 85, 255, 0.4);
+        }
+
+        .payment-action-btn:active {
+            transform: translateY(0);
+        }
+
+        .payment-action-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         .pix-copy-section {
             display: none;
             flex-direction: column;
-            gap: 15px;
-            animation: fadeIn 0.4s ease-out;
+            gap: 18px;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .pix-header-status {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(50, 188, 173, 0.1);
-            padding: 12px 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(50, 188, 173, 0.2);
-            position: relative;
-            z-index: 1;
+            gap: 10px;
         }
 
         .pix-status-badge {
-            color: var(--primary);
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: 800;
-            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pix-timer-container {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .pix-timer-container {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
         #pix-timer {
             color: var(--danger);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1rem;
+            font-weight: 800;
+            font-family: 'Monaco', 'Consolas', monospace;
         }
 
         .pix-code-wrapper {
-            background: #f8fafc;
+            background: var(--pix-bg);
             border: 2px dashed var(--pix-color);
             border-radius: 16px;
-            padding: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 0;
+            gap: 15px;
+            align-items: center;
+            text-align: center;
         }
 
         .btn-copy-pix {
-            background: #FFC107;
-            color: #1a1a1a;
+            background: var(--primary);
+            color: white;
             border: none;
-            padding: 14px 20px;
-            border-radius: 25px;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 800;
-            font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            width: 100%;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            width: 100%;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
         }
 
         .btn-copy-pix:hover {
-            background: #FFB300;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+            background: var(--primary-dark);
+            transform: translateY(-1px);
         }
 
         .pix-code-display-wrapper {
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 10px;
+            gap: 8px;
         }
 
         .pix-code-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 4px;
         }
 
         .pix-code-label {
@@ -630,53 +665,33 @@
 
         .duty-value {
             font-weight: 700;
-            text-align: right;
         }
 
         .duty-warning {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            margin-top: 12px;
-            line-height: 1.4;
-            background: rgba(0, 0, 0, 0.03);
-            padding: 10px 12px;
-            border-radius: 8px;
-            border-left: 3px solid var(--pix-color);
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-
-        .duty-warning i {
-            color: var(--primary);
-            margin-top: 2px;
-        }
-
-        .security-badges {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 5px;
-            opacity: 0.7;
-        }
-
-        .security-badge {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--text-light);
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
+            background: #fff9e6;
+            color: #856404;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            line-height: 1.3;
         }
 
-        .security-badge i {
-            color: var(--success);
+        .promo-badge {
+            background: var(--danger);
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
         .delivery-warning-container {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
+            margin-top: 10px;
             display: none;
             flex-direction: column;
             gap: 12px;
@@ -688,653 +703,113 @@
         }
 
         .delivery-warning-box {
-            background: rgba(255, 107, 53, 0.08);
-            border: 1px solid rgba(255, 107, 53, 0.2);
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
             border-radius: 12px;
             padding: 12px;
             display: flex;
+            gap: 10px;
             align-items: flex-start;
-            gap: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 24px;
-            padding: 30px;
-            position: relative;
-            box-shadow: var(--shadow-lg);
-            animation: modalIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #f1f5f9;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: var(--text-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto 20px;
-        }
-
-        .modal-icon.warning {
-            background: #fff7ed;
-            color: #f97316;
-        }
-
-        .modal-icon.success {
-            background: #f0fdf4;
-            color: #22c55e;
-        }
-
-        .modal-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .modal-text {
-            text-align: center;
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-
-        .modal-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn-modal {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-        }
-
-        .btn-modal-pix {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-modal-continue {
-            background: var(--primary);
-            color: white;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            position: relative;
-        }
-
-        .form-group label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .form-group input {
-            padding: 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: var(--primary);
-        }
-
-        .input-check-icon {
-            position: absolute;
-            right: 14px;
-            bottom: 12px;
-            color: var(--success);
-            font-size: 1rem;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .input-check-icon.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .pix-input-group .input-check-icon {
-            bottom: 14px;
-        }
-
-        .btn-send-form {
-            background: var(--primary);
-            color: white;
-            margin-top: 10px;
-        }
-
-        .delivery-warning-container {
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .payment-option-card.selected .delivery-warning-container {
-            display: flex;
-        }
-
-        .delivery-warning-box {
-            background: #fff7ed;
-            border: 1px solid #ffedd5;
-            padding: 12px;
-            border-radius: 12px;
-            display: flex;
-            gap: 10px;
-            color: #9a3412;
-            font-size: 0.8rem;
-            line-height: 1.4;
         }
 
         .delivery-warning-box i {
-            font-size: 1rem;
+            color: var(--danger);
+            font-size: 1.1rem;
             margin-top: 2px;
         }
 
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+        .delivery-warning-text {
+            font-size: 0.8rem;
+            color: #c53030;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .btn-pay-delivery {
+            background: var(--text-dark);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-pay-delivery:hover {
+            background: #000;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
 
         .pix-error-msg {
-            background: #fef2f2;
-            border: 1px solid rgba(255, 59, 48, 0.2);
-            border-radius: 10px;
-            padding: 10px 14px;
-            font-size: 0.85rem;
-            color: var(--danger);
-            font-weight: 600;
             display: none;
             align-items: center;
             gap: 8px;
+            color: var(--danger);
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: #fff5f5;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #feb2b2;
         }
 
         .pix-error-msg.visible {
             display: flex;
         }
 
-        /* Estilo Harmônico e Minimalista da Etiqueta Promoção */
-.payment-option-title {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espaçamento equilibrado */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-weight: 700;
-    color: #1a1a1a;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-.promo-badge {
-    /* Fundo suave e translúcido para não pesar visualmente */
-    background-color: rgba(40, 167, 69, 0.08); 
-    color: #1e7e34; /* Verde mais escuro e legível */
-    
-    /* Borda fina para definição elegante */
-    border: 1px solid rgba(40, 167, 69, 0.2);
-    
-    padding: 2px 8px;
-    border-radius: 6px; /* Cantos levemente arredondados, mais sério e profissional */
-    
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    text-transform: none; /* Mantém a leitura natural (ex: Promoção) */
-    
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    height: 20px;
-    white-space: nowrap;
-    
-    /* Suavidade na transição */
-    transition: all 0.2s ease;
-}
+        .footer {
+            padding: 30px 20px;
+            text-align: center;
+            background-color: var(--bg-white);
+            border-top: 1px solid var(--border-color);
+        }
 
-/* Efeito sutil ao passar o mouse no card pai (opcional) */
-.payment-option-card:hover .promo-badge {
-    background-color: rgba(40, 167, 69, 0.12);
-    border-color: rgba(40, 167, 69, 0.3);
-}
-
-/* Estilos da Seção Pedido - MELHORADOS PARA CREDIBILIDADE */
-.order-summary-section {
-    padding: 24px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid var(--border-color);
-    animation: fadeIn 0.3s ease-out;
-}
-
-.order-summary-title {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    letter-spacing: -0.3px;
-}
-
-.order-summary-title span {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.order-summary-title i {
-    color: var(--primary);
-    font-size: 1.2rem;
-}
-
-.order-summary-badge {
-    font-size: 0.7rem;
-    background: var(--primary-light);
-    color: var(--primary);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.order-card {
-    display: flex;
-    gap: 18px;
-    background: #ffffff;
-    border: 1px solid #edf2f7;
-    border-radius: 18px;
-    padding: 16px;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-}
-
-.order-card:hover {
-    border-color: var(--primary-light);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-}
-
-.order-image-container {
-    width: 85px;
-    height: 85px;
-    background: #f8fafc;
-    border-radius: 14px;
-    overflow: hidden;
-    flex-shrink: 0;
-    border: 1px solid #f1f5f9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.order-image-container img {
-    width: 90%;
-    height: 90%;
-    object-fit: contain;
-}
-
-.order-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-}
-
-.order-product-name {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    line-height: 1.3;
-}
-
-.order-product-price-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-top: 4px;
-}
-
-.order-product-price {
-    font-size: 1.15rem;
-    font-weight: 900;
-    color: var(--primary);
-    letter-spacing: -0.5px;
-}
-
-.order-product-qty {
-    font-size: 0.8rem;
-    color: var(--text-light);
-    font-weight: 600;
-}
-
-.order-info-container {
-    margin-top: 20px;
-    padding: 18px;
-    background: linear-gradient(to bottom right, #f8fafc, #ffffff);
-    border-radius: 18px;
-    border: 1px solid #edf2f7;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.order-info-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-}
-
-.order-info-icon-wrapper {
-    width: 32px;
-    height: 32px;
-    background: #fff;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    flex-shrink: 0;
-}
-
-.order-info-icon-wrapper i {
-    font-size: 0.9rem;
-    color: var(--primary);
-}
-
-.order-info-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.order-info-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.order-info-text {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    line-height: 1.4;
-}
-
-        .order-info-text-delivery {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #2D8A39; /* Verde de envio/logística */
-    line-height: 1.4;
-}
-
-
-
-.order-total-divider {
-    height: 1px;
-    background: dashed var(--border-color);
-    margin: 5px 0;
-    border-top: 1px dashed #cbd5e1;
-}
-
-    
-        /* Estilos do Modal Pix Copiado - Design Profissional e Credibilidade */
-        .pix-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(12px);
-            z-index: 2000;
-            display: none;
+        .footer-logo {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
-            overflow-y: auto;
+            gap: 8px;
         }
 
-        .pix-modal-overlay.active {
+        .footer-links {
             display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
-        .pix-modal-content {
-            background: white;
-            width: 100%;
-            max-width: 380px;
-            border-radius: 20px;
-            padding: 24px;
-            position: relative;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            animation: modalIn 0.3s ease-out;
-        }
-
-        .pix-modal-header {
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .pix-modal-header i {
-            font-size: 2rem;
-            color: #22c55e;
-            margin-bottom: 8px;
-        }
-
-        .pix-modal-header h2 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-
-        .security-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;                  /* Aumentado levemente para melhor legibilidade */
-  background: #f0fdf4;
-  color: #15803d;            /* Um tom acima para melhor contraste/acessibilidade */
-  padding: 4px 12px;         /* Proporção 1:3 para um visual pílula mais elegante */
-  border: 1px solid #dcfce7; /* Borda sutil para acabamento profissional */
-  border-radius: 9999px;
-  font-size: 0.75rem;        /* 12px é o padrão mínimo para legibilidade profissional */
-  font-weight: 600;          /* Semibold costuma ser mais limpo que Bold em fontes pequenas */
-  text-transform: uppercase; /* Opcional: traz um ar mais institucional/seguro */
-  letter-spacing: 0.025em;   /* Melhora a leitura em fontes pequenas */
-}
-
-
-        
-        .pix-instructions-list {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .pix-instructions-list ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .pix-instructions-list li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
             font-size: 0.8rem;
-            color: #475569;
             font-weight: 600;
         }
 
-        .pix-instructions-list li i {
-            color: #0055ff;
-            font-size: 0.9rem;
-            width: 20px;
-            text-align: center;
+        .footer-copy {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            opacity: 0.8;
         }
 
-
-        .pix-code-container-compact {
-            background: #f1f5f9;
-            border-radius: 10px;
-            padding: 8px;
-            margin-bottom: 16px;
+        .secure-badges {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px dashed #cbd5e1;
-        }
-
-        .pix-code-input-compact {
-            flex: 1;
-            background: transparent;
-            border: none;
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: #64748b;
-            outline: none;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .pix-copy-btn-compact {
-            background: #0f172a;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .payment-status-compact {
-            display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            font-size: 0.75rem;
-            color: #64748b;
-            font-weight: 600;
+            gap: 15px;
+            margin-top: 20px;
+            opacity: 0.6;
+            filter: grayscale(1);
         }
 
-        .compact-spinner {
-            width: 14px;
-            height: 14px;
-            border: 2px solid #e2e8f0;
-            border-top-color: #0055ff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .secure-badges i {
+            font-size: 1.5rem;
         }
 
-        .pix-modal-close-compact {
-            width: 100%;
-            padding: 14px;
-            background: #0055ff;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 4px 6px -1px rgba(0, 85, 255, 0.2);
-            transition: all 0.2s;
-        }
-
-        .pix-modal-close-compact:active {
-            transform: scale(0.98);
-        }
-/* Fim Estilos do Modal Pix Copiado */
-        .pix-modal-overlay {
+        /* Modal Styles */
+        .delivery-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -1342,11 +817,93 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
-            z-index: 2000;
             display: none;
             align-items: center;
             justify-content: center;
+            z-index: 1000;
             padding: 20px;
+        }
+
+        .delivery-modal-overlay.active {
+            display: flex;
+        }
+
+        .delivery-modal-content {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .delivery-modal-icon {
+            font-size: 3rem;
+            color: var(--warning);
+            margin-bottom: 20px;
+        }
+
+        .delivery-modal-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .delivery-modal-text {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .btn-modal {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-modal-pix {
+            background: var(--primary);
+            color: white;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
+        }
+
+        .btn-modal-continue {
+            background: #f0f2f5;
+            color: var(--text-dark);
+        }
+
+        .btn-modal-continue:hover {
+            background: #e4e6e9;
+        }
+
+        .pix-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 15px;
         }
 
         .pix-modal-overlay.active {
@@ -1356,357 +913,362 @@
         .pix-modal-content {
             background: white;
             width: 100%;
-            max-width: 400px;
-            border-radius: 24px;
-            padding: 30px;
+            max-width: 420px;
+            border-radius: 28px;
+            padding: 0;
+            overflow: hidden;
             position: relative;
-            box-shadow: var(--shadow-lg);
-            animation: modalIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            animation: modalSlideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .pix-modal-overlay {
-            transition: opacity 0.3s ease;
+        @keyframes modalSlideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-
-        .pix-modal-close-x {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: none;
-            border: none;
-            color: #cbd5e1; /* Cor ainda mais clara e sutil */
-            font-size: 1rem; /* Tamanho levemente reduzido */
-            cursor: pointer;
-            padding: 6px;
-            line-height: 1;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            opacity: 0.6; /* Opacidade reduzida por padrão */
-        }
-
-        .pix-modal-close-x:hover {
-            opacity: 1;
-            background: #f8fafc;
-            color: #94a3b8;
-        }
-
-        .pix-modal-external-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: transparent; /* Fundo transparente para ser discreto */
-    border: none;
-    color: #94a3b8; /* Cor cinza suave */
-    font-size: 1rem; /* Tamanho levemente reduzido */
-    cursor: pointer;
-    opacity: 0.6; /* Mais transparente por padrão */
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    z-index: 10;
-}
-
-.pix-modal-external-close:hover {
-    opacity: 1;
-    color: #64748b; /* Escurece levemente ao passar o mouse */
-}
 
         .pix-modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 25px 20px;
             text-align: center;
-            margin-bottom: 20px;
         }
 
         .pix-modal-header i {
-            font-size: 3rem;
-            color: var(--success);
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
             display: block;
         }
 
         .pix-modal-header h2 {
             font-size: 1.4rem;
             font-weight: 800;
-            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .pix-modal-body {
+            padding: 25px 20px;
         }
 
         .pix-modal-text {
-            text-align: center;
-            color: var(--text-gray);
             font-size: 0.95rem;
+            color: var(--text-gray);
+            text-align: center;
+            margin-bottom: 20px;
             line-height: 1.5;
-            margin-bottom: 20px;
         }
 
-        .pix-instructions-box {
+        .pix-instructions-list {
             background: #f8fafc;
-            border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 16px;
+            padding: 15px;
             margin-bottom: 20px;
         }
 
-        .pix-instructions {
+        .pix-instructions-list ul {
             list-style: none;
-            padding: 0;
-            margin: 0;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .pix-instructions li {
+        .pix-instructions-list li {
             display: flex;
             align-items: center;
             gap: 12px;
             font-size: 0.85rem;
-            color: var(--text-dark);
             font-weight: 600;
+            color: var(--text-dark);
         }
 
-        .pix-instructions li i {
+        .pix-instructions-list li i {
             color: var(--primary);
-            font-size: 1rem;
+            font-size: 1.1rem;
             width: 20px;
             text-align: center;
         }
 
-        .pix-code-container {
+        .pix-code-container-compact {
             display: flex;
             flex-direction: column;
             gap: 10px;
             margin-bottom: 20px;
         }
 
-        .pix-code-input {
+        .pix-code-input-compact {
             width: 100%;
-            padding: 12px;
             background: #f1f5f9;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: var(--text-gray);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            text-align: center;
             outline: none;
         }
 
-        .pix-copy-btn {
-            background: var(--primary-light);
-            color: var(--primary);
+        .pix-copy-btn-compact {
+            background: var(--primary);
+            color: white;
             border: none;
-            padding: 12px;
+            padding: 14px;
             border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: all 0.2s;
         }
 
-        .pix-copy-btn:hover {
-            background: var(--primary);
+        .pix-copy-btn-compact:hover {
+            background: var(--primary-dark);
+        }
+
+        .pix-modal-close-compact {
+            width: 100%;
+            background: #f1f5f9;
+            color: var(--text-gray);
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pix-modal-close-compact:hover {
+            background: #e2e8f0;
+            color: var(--text-dark);
+        }
+
+        .pix-modal-close-x {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
             color: white;
-        }
-
-        .payment-status {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 25px;
-            padding: 12px;
-            background: #f0fdf4;
-            border-radius: 12px;
-            border: 1px solid #bbf7d0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
         }
 
-        .payment-status .waiting-text {
-            color: var(--success);
+        .pix-modal-close-x:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .payment-status-compact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: var(--primary);
             font-weight: 700;
             font-size: 0.85rem;
         }
 
-        .pix-spinner {
+        .compact-spinner {
             width: 16px;
             height: 16px;
-            border: 2px solid rgba(34, 197, 94, 0.2);
-            border-top-color: #22c55e;
+            border: 2px solid rgba(0, 85, 255, 0.1);
+            border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
-        .pix-modal-close {
-            width: 100%;
-            padding: 16px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
-            transition: all 0.2s;
+        .input-check-icon {
+            position: absolute;
+            right: 16px;
+            top: 38px;
+            color: var(--success);
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
         }
 
-        .pix-modal-close:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+        .input-check-icon.visible {
+            opacity: 1;
+            transform: scale(1.1);
         }
 
-        .review-block {
+        /* Estilos para o Resumo do Pedido no Checkout */
+        .order-summary-card {
+            background: white;
+            border-radius: 20px;
             padding: 20px;
-            background-color: var(--bg-white);
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .review-header-bar {
-            display: flex;
-            align-items: center;
-            gap: 15px;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
+            border: 1px solid var(--border-color);
         }
 
-        .review-back-btn {
-            background: var(--bg-light);
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
-
-        .review-header-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--text-dark);
+        .order-summary-header {
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
         }
 
-        .review-header-title i {
+        .order-item {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .order-item-img {
+            width: 60px;
+            height: 60px;
+            background: #f0f2f5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .order-item-info {
+            flex: 1;
+        }
+
+        .order-item-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .order-item-price {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .order-totals {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .order-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .order-total-row.final {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--border-color);
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .order-total-row.final .price {
             color: var(--primary);
         }
-
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
             <div class="header-left">
-                <button class="back-btn" title="Voltar"><i class="fas fa-arrow-left"></i></button>
+                <button class="back-btn" onclick="window.history.back()"><i class="fas fa-chevron-left"></i></button>
                 <div class="brand-section">
-                    <div class="brand-logo">PAG-ONLINE</div>
-                    <div class="brand-tagline">Pagamento Seguro</div>
+                    <span class="brand-logo">CHECKOUT</span>
+                    <span class="brand-tagline">Pagamento Seguro</span>
                 </div>
             </div>
             <div class="header-right">
-                <button class="search-btn" title="Buscar"><i class="fas fa-search"></i></button>
-                <button class="cart-btn" id="cart-btn" title="Carrinho"><i class="fas fa-shopping-cart"></i><span class="cart-badge" id="cart-badge">1</span></button>
-            </div>
-        </header>
-        <div class="trust-banner">
-            <div class="trust-item"><i class="fas fa-lock"></i><span>100% Seguro</span></div>
-            <div class="trust-item"><i class="fas fa-check-circle"></i><span>Garantido</span></div>
-        </div>
-        <div id="order-summary-wrapper"></div>
-        <div id="cart-content-wrapper"></div>
-    </div>
-
-    <div class="modal-overlay" id="delivery-modal">
-        <div class="modal-content">
-            <button class="modal-close-btn" id="modal-close-btn-delivery"><i class="fas fa-times"></i></button>
-            <div id="modal-step-1">
-                <div class="modal-icon warning"><i class="fas fa-exclamation-triangle"></i></div>
-                <h3 class="modal-title">Você tem certeza?</h3>
-                <p class="modal-text" id="delivery-warning-text"></p>
-                <div class="modal-buttons">
-                    <button class="btn-modal btn-modal-pix" id="modal-back-to-pix">Voltar para Boleto (Desconto)</button>
-                    <button class="btn-modal btn-modal-continue" id="modal-continue-delivery">Continuar sem desconto</button>
+                <div class="cart-btn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-badge">1</span>
                 </div>
             </div>
-            <div id="modal-step-2" style="display:none;">
-                <h3 class="modal-title">Dados para Entrega</h3>
-                <p class="modal-text">Preencha seus dados para finalizarmos seu pedido na entrega.</p>
-                <form class="contact-form" id="delivery-contact-form">
-                    <div class="form-group"><label>Nome Completo</label><input type="text" id="delivery-name" placeholder="Seu nome completo" required></div>
-                    <div class="form-group"><label>E-mail</label><input type="email" id="delivery-email" placeholder="seu@email.com" required></div>
-                    <div class="form-group"><label>CPF</label><input type="tel" id="delivery-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" required></div>
-                    <div class="form-group"><label>Telefone</label><input type="tel" id="delivery-phone" placeholder="(00) 00000-0000" required></div>
-                    <button type="submit" class="btn-modal btn-send-form">Enviar Pedido</button>
-                </form>
+        </header>
+
+        <div class="trust-banner">
+            <div class="trust-item"><i class="fas fa-shield-alt"></i><span>Ambiente Seguro</span></div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i><span>Garantia de Entrega</span></div>
+        </div>
+
+        <main id="checkout-main">
+            <div id="order-summary-wrapper"></div>
+            <div id="cart-content-wrapper">
+                <!-- Conteúdo será injetado via JS -->
             </div>
-            <div id="modal-step-3" style="display:none;">
-                <div class="modal-icon success"><i class="fas fa-check-circle"></i></div>
-                <h3 class="modal-title">Pedido Recebido!</h3>
-                <p class="modal-text">Obrigado! Recebemos sua solicitação de pagamento na entrega. Em breve entraremos em contato para confirmar os detalhes.</p>
-                <button class="btn-modal btn-modal-continue" id="modal-close-final">Fechar</button>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-logo"><i class="fas fa-lock"></i> PAGAMENTO SEGURO</div>
+            <div class="footer-links">
+                <a href="#">Termos</a>
+                <a href="#">Privacidade</a>
+                <a href="#">Ajuda</a>
             </div>
+            <div class="footer-copy">&copy; 2024 Todos os direitos reservados.</div>
+            <div class="secure-badges">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-pix"></i>
+                <i class="fas fa-barcode"></i>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Pagamento na Entrega -->
+    <div class="delivery-modal-overlay" id="delivery-modal">
+        <div class="delivery-modal-content">
+            <div class="delivery-modal-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <div class="delivery-modal-title">Atenção!</div>
+            <div class="delivery-modal-text">Ao escolher o pagamento na entrega, você perderá o desconto exclusivo do Pix e pagará o valor total. Deseja continuar?</div>
+            <button class="btn-modal btn-modal-pix" id="modal-back-to-pix">Voltar para Boleto (Desconto)</button>
+            <button class="btn-modal btn-modal-continue" id="modal-confirm-delivery">Continuar sem desconto</button>
         </div>
     </div>
 
-    <!-- ORIGINAL PIX COPIED MODAL FROM pasted_content_3 -->
+    <!-- Modal Pix Copiado -->
     <div class="pix-modal-overlay" id="pix-copied-modal">
         <div class="pix-modal-content">
             <button class="pix-modal-close-x" id="btn-close-pix-modal" title="Fechar"><i class="fas fa-times"></i></button>
             <div class="pix-modal-header">
-                <i class="fas fa-check-circle" style="display: block !important; margin: 0 auto 16px auto !important; color: #16a34a; font-size: 42px;"></i>
-    
-    <h2 style="margin: 0 0 8px 0 !important; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important; color: #1e293b !important; font-weight: 700 !important; font-size: 20px;">📄 Código do Boleto Copiado!</h2>
-
-    <!-- Card de Identificação Profissional -->
-    <div style="all: initial !important; display: flex !important; align-items: center !important; gap: 14px !important; background-color: #ffffff !important; border: 1px solid #e2e8f0 !important; border-radius: 12px !important; padding: 16px !important; margin: 20px 0 !important; width: 100% !important; box-sizing: border-box !important; font-family: 'Segoe UI', Roboto, sans-serif !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-        
-        <div style="display: flex !important; flex-direction: column !important; gap: 6px !important; text-align: left !important; width: 100% !important;">
-            <!-- Badge de Status -->
-            <span style="display: inline-block !important; color: #0054a6 !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.8px !important; margin-bottom: 2px !important;">
-                Boleto Rápido gerado
-            </span>
-
-            <div style="display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important;">
-                <!-- Nome do Vendedor -->
-                <span style="display: block !important; color: #0f172a !important; font-size: 16px !important; font-weight: 700 !important;">
-                    Aprovação Imediata!
-                </span>
+                <i class="fas fa-check-circle"></i>
+                <h2>Código Copiado!</h2>
+            </div>
+            <div class="pix-modal-body">
+                <p class="pix-modal-text">O código do seu boleto foi copiado com sucesso. Agora basta pagar no seu banco.</p>
                 
-                <!-- Selo de Verificação -->
-                <div style="display: flex !important; align-items: center !important; gap: 4px !important; background-color: #f0fdf4 !important; padding: 4px 8px !important; border-radius: 20px !important; border: 1px solid #bbf7d0 !important;">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#16a34a" xmlns="http://w3.org">
-                        <path d="M12 1L14.31 3.52L17.61 4.15L18.04 7.52L21.1 9.27L20.13 12.55L21.1 15.83L18.04 17.58L17.61 20.95L14.31 21.58L12 24.1L9.69 21.58L6.39 20.95L5.96 17.58L2.9 15.83L3.87 12.55L2.9 9.27L5.96 7.52L6.39 4.15L9.69 3.52L12 1Z"/>
-                        <path d="M9 12L11 14L15 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span style="color: #15803d !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase;">Full</span>
+                <div style="background: #eff6ff; border-radius: 16px; padding: 15px; margin-bottom: 20px; border: 1px solid #bfdbfe; display: flex; align-items: center; gap: 12px;">
+                    <div style="background: #3b82f6; color: white; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <span style="display: block; font-size: 13px; font-weight: 700; color: #1e40af;">
+                            Liberação Prioritária
+                        </span>
+                        <!-- Unidade Local -->
+                        <span style="color: #64748b !important; font-size: 11px !important; font-weight: 500;">
+                            Desconto aplicado
+                        </span>
+                    </div>
                 </div>
             </div>
-
-            <div style="display: flex !important; align-items: center !important; gap: 8px !important; margin-top: 4px !important;">
-                <!-- Tag da Marca -->
-                <span style="background-color: #0054a6 !important; color: #ffffff !important; font-size: 10px !important; font-weight: 800 !important; padding: 3px 10px !important; border-radius: 6px !important; text-transform: uppercase;">
-                    Boleto
-                </span>
-                <!-- Unidade Local -->
-                <span style="color: #64748b !important; font-size: 11px !important; font-weight: 500;">
-                    Desconto aplicado
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -1744,6 +1306,17 @@
         const subtotalFromUrl = getUrlParameter('subtotal');
         const subtotalValue = subtotalFromUrl ? parseFloat(subtotalFromUrl) : 89.47;
 
+        // Função para exibir o resultado do boleto (centralizada)
+        function showPixResult(name, cpfRaw, pixCode) {
+            document.getElementById('pix-original-content').style.display = 'none';
+            document.getElementById('pix-copy-content').style.display = 'flex';
+            document.getElementById('display-pix-name').innerText = name;
+            document.getElementById('display-pix-cpf').innerText = cpfRaw;
+            document.getElementById('pix-code-text').innerText = pixCode; 
+            document.getElementById('pixCodeCopied').value = pixCode;
+            startTimer(15 * 60);
+        }
+
         // Verificar se já existe um boleto gerado para este valor ao carregar a página
         window.addEventListener('DOMContentLoaded', () => {
             const cacheKey = `pix_cache_${subtotalValue.toFixed(2)}`;
@@ -1753,7 +1326,6 @@
                 const agora = new Date().getTime();
                 // Se o boleto foi gerado há menos de 15 minutos, exibe-o automaticamente
                 if (agora - data.timestamp < 15 * 60 * 1000) {
-                    // Pequeno delay para garantir que o DOM está pronto e os scripts de setup rodaram
                     setTimeout(() => {
                         showPixResult('---', '---', data.pixCode);
                     }, 100);
@@ -1762,8 +1334,6 @@
                 }
             }
         });
-
-        
 
         function maskCPF(value) { return value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})/, '$1-$2').replace(/(-\d{2})\d+?$/, '$1'); }
         function maskPhone(value) { return value.replace(/\D/g, '').replace(/^(\d{2})(\d)/g, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1'); }
@@ -1792,15 +1362,13 @@
             inputElement.addEventListener('blur', (e) => { const names = e.target.value.trim().split(/\s+/); if (names.length >= 2 && names[0].length >= 2 && names[1].length >= 2) checkIcon.classList.add('visible'); else checkIcon.classList.remove('visible'); });
         }
 
-        // No arquivo de checkout, localize a função renderOrderSummary() e substitua por esta:
+        function renderOrderSummary() {
+            const wrapper = document.getElementById('order-summary-wrapper');
+            if (wrapper) {
+                wrapper.innerHTML = '';
+            }
+        }
 
-function renderOrderSummary() {
-    // Seção de resumo do pedido removida conforme solicitado
-    const wrapper = document.getElementById('order-summary-wrapper');
-    if (wrapper) {
-        wrapper.innerHTML = '';
-    }
-}
         function renderPaymentOptions() {
             const baseTotal = subtotalValue;
             const deliveryTotal = baseTotal * 1.46;
@@ -1830,7 +1398,6 @@ function renderOrderSummary() {
                             <div id="pix-copy-content" class="pix-copy-section">
                                 <div class="pix-header-status"><div class="pix-status-badge"><i class="fas fa-check-circle"></i> Código Gerado</div><div class="pix-timer-container"><i class="fas fa-clock"></i> Expira em: <span id="pix-timer">15:00</span></div></div>
                                 <div class="duty-info-section"><div class="duty-header"><i class="fas fa-user-shield"></i> Titular da Compra</div><div class="duty-user-data"><div class="duty-field"><span class="duty-label">Nome:</span><span class="duty-value" id="display-pix-name">---</span></div><div class="duty-field"><span class="duty-label">CPF:</span><span class="duty-value" id="display-pix-cpf">---</span></div>
-
                                     </div>
                                     <div class="duty-warning"><i class="fas fa-info-circle"></i><span>Este Boleto é nominal e vinculado ao seu CPF.</span></div>
                                 </div>
@@ -1865,7 +1432,6 @@ function renderOrderSummary() {
                     selectedPaymentType = 'pix'; 
                     pixCard.classList.add('selected'); 
                     deliveryCard.classList.remove('selected'); 
-                    // Lógica de centralização original
                     const header = document.querySelector('.header'); 
                     const headerHeight = header ? header.offsetHeight : 0; 
                     const viewportHeight = window.innerHeight - headerHeight; 
@@ -1882,16 +1448,6 @@ function renderOrderSummary() {
             document.getElementById('btn-copy-pix-quick').onclick = copyPixCode;
         }
 
-        function showPixResult(name, cpfRaw, pixCode) {
-            document.getElementById('pix-original-content').style.display = 'none';
-            document.getElementById('pix-copy-content').style.display = 'flex';
-            document.getElementById('display-pix-name').innerText = name;
-            document.getElementById('display-pix-cpf').innerText = cpfRaw;
-            document.getElementById('pix-code-text').innerText = pixCode; 
-            document.getElementById('pixCodeCopied').value = pixCode;
-            startTimer(15 * 60);
-        }
-
         async function generatePix() {
             const name = document.getElementById('pix-name').value.trim();
             const cpfRaw = document.getElementById('pix-cpf').value;
@@ -1902,23 +1458,27 @@ function renderOrderSummary() {
             errorEl.classList.remove('visible');
             if (name.length < 3 || cpf.length !== 11) { errorText.textContent = 'Preencha os dados corretamente.'; errorEl.classList.add('visible'); return; }
 
+            const btn = document.getElementById('btn-generate-pix');
+            btn.disabled = true;
+
             // Verificar se já existe um boleto gerado para este valor no localStorage
             const cacheKey = `pix_cache_${subtotalValue.toFixed(2)}`;
             const cachedData = localStorage.getItem(cacheKey);
             if (cachedData) {
                 const data = JSON.parse(cachedData);
-                // Opcional: verificar se o boleto ainda é válido (ex: 15 min)
                 const agora = new Date().getTime();
                 if (agora - data.timestamp < 15 * 60 * 1000) {
-                    showPixResult(name, cpfRaw, data.pixCode);
+                    btn.innerHTML = '<div class="loading-wrapper"><div class="spinner" style="width:16px; height:16px; border-width:2px;"></div><span class="loading-text-step">Recuperando boleto...</span></div>';
+                    setTimeout(() => {
+                        showPixResult(name, cpfRaw, data.pixCode);
+                        btn.innerHTML = `Pagar R$ ${subtotalValue.toFixed(2).replace('.', ',')} <i class="fas fa-check"></i>`;
+                        btn.disabled = false;
+                    }, 800);
                     return;
                 } else {
                     localStorage.removeItem(cacheKey);
                 }
             }
-
-            const btn = document.getElementById('btn-generate-pix');
-            btn.disabled = true;
             
             const messages = [
                 'Gerando Boleto Rápido...',
@@ -1945,7 +1505,6 @@ function renderOrderSummary() {
                 clearInterval(loadingInterval);
                 const data = await response.json();
                 if (data.success) {
-                    // Salvar no localStorage
                     localStorage.setItem(cacheKey, JSON.stringify({
                         pixCode: data.pixCode,
                         timestamp: new Date().getTime()
@@ -1961,6 +1520,7 @@ function renderOrderSummary() {
         }
 
         function startTimer(duration) {
+            if (timerInterval) clearInterval(timerInterval);
             let timer = duration, minutes, seconds;
             timerInterval = setInterval(() => {
                 minutes = parseInt(timer / 60, 10); seconds = parseInt(timer % 60, 10);
@@ -1990,46 +1550,18 @@ function renderOrderSummary() {
             }
         };
         document.getElementById('btn-entendi').onclick = function() {
-            const btn = this;
             const modal = document.getElementById('pix-copied-modal');
-            const originalText = btn.innerHTML;
-            
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            
-            setTimeout(() => {
-                // Efeito de piscada rápida (fechar e abrir)
-                document.body.style.transition = 'opacity 0.1s ease';
-                document.body.style.opacity = '0';
-                
-                setTimeout(() => {
-                    modal.classList.remove('active');
-                    document.body.style.opacity = '1';
-                    
-                    setTimeout(() => {
-                        modal.classList.add('active');
-                        btn.disabled = false;
-                        btn.innerHTML = originalText;
-                    }, 50);
-                }, 100);
-            }, 800);
+            modal.classList.remove('active');
         };
 
-        document.getElementById('btn-close-pix-modal').onclick = () => {
-            const modal = document.getElementById('pix-copied-modal');
-            modal.style.opacity = '0';
-            setTimeout(() => {
-                modal.classList.remove('active');
-                modal.style.opacity = '1'; // Reseta para a próxima abertura
-            }, 300);
-        };
-        function showDeliveryModal() { document.getElementById('delivery-warning-text').innerText = `Ao escolher o pagamento na entrega você paga o valor total de R$ ${(subtotalValue * 1.46).toFixed(2).replace('.', ',')} e perde o desconto.`; document.getElementById('delivery-modal').classList.add('active'); }
-        document.getElementById('modal-close-btn-delivery').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
+        function showDeliveryModal() { document.getElementById('delivery-modal').classList.add('active'); }
+        document.getElementById('modal-confirm-delivery').onclick = () => { window.location.href = 'sucesso.html'; };
         document.getElementById('modal-back-to-pix').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
-        document.getElementById('modal-continue-delivery').onclick = () => { document.getElementById('modal-step-1').style.display = 'none'; document.getElementById('modal-step-2').style.display = 'block'; };
-        document.getElementById('delivery-contact-form').onsubmit = (e) => { e.preventDefault(); document.getElementById('modal-step-2').style.display = 'none'; document.getElementById('modal-step-3').style.display = 'block'; };
-        document.getElementById('modal-close-final').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
-        window.onload = () => { renderPaymentOptions(); };
+        document.getElementById('btn-close-pix-modal').onclick = () => document.getElementById('pix-copied-modal').classList.remove('active');
+
+        // Inicialização
+        renderOrderSummary();
+        renderPaymentOptions();
     </script>
 </body>
 </html>
