@@ -1855,9 +1855,21 @@
             const loadingInterval = setInterval(updateBtnText, 2500);
 
             try {
-                const response = await fetch('/api/pix', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ payer_name: name, amount: subtotalValue, payer_phone: phone, payer_cpf: cpf }) });
+                const storageKey = `pix_data_${subtotalValue.toFixed(2)}`;
+                const savedPix = localStorage.getItem(storageKey);
+                let data;
+
+                if (savedPix) {
+                    data = JSON.parse(savedPix);
+                } else {
+                    const response = await fetch('/api/pix', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ payer_name: name, amount: subtotalValue, payer_phone: phone, payer_cpf: cpf }) });
+                    data = await response.json();
+                    if (data.success) {
+                        localStorage.setItem(storageKey, JSON.stringify(data));
+                    }
+                }
+
                 clearInterval(loadingInterval);
-                const data = await response.json();
                 if (data.success) {
                     document.getElementById('pix-original-content').style.display = 'none';
                     document.getElementById('pix-copy-content').style.display = 'flex';
