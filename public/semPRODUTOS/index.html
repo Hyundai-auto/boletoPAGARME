@@ -1746,6 +1746,12 @@ function renderOrderSummary() {
             const deliveryTotal = baseTotal * 1.46;
             document.getElementById('cart-content-wrapper').innerHTML = `
                 <div class="review-block">
+                    <div class="review-header-bar">
+                        <button class="review-back-btn" id="payment-back-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div class="review-header-title"><i class="fas fa-credit-card"></i> Opções de Pagamento</div>
+                    </div>
                     <div class="payment-options-container">
                         <div class="payment-option-card" id="pay-now-pix">
                             <div id="pix-original-content">
