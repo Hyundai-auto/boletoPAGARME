@@ -1562,19 +1562,28 @@
             transform: translateY(-2px);
         }
 
-        /* Spinner moderno com movimento fluido */
+       /* Estado desativado do botão (Cinza) */
+.payment-action-btn:disabled {
+    background: #cbd5e1 !important; /* Cinza suave */
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+/* Spinner adaptado para o fundo cinza */
 .spinner {
     width: 22px;
     height: 22px;
-    border: 3px solid rgba(255, 255, 255, 0.2);
-    border-top: 3px solid #ffffff;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top: 3px solid #64748b; /* Cinza escuro para contraste */
     border-radius: 50%;
     animation: spin 0.8s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
-    filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
 }
 
-/* Texto com efeito de pulsação suave */
+/* Texto de carregamento em cinza */
 .loading-text-step {
+    color: #64748b;
     font-weight: 700;
     letter-spacing: 0.3px;
     animation: pulse 1.5s ease-in-out infinite;
@@ -1587,8 +1596,9 @@
 
 @keyframes pulse {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+    50% { opacity: 0.6; }
 }
+
 
 
     </style>
