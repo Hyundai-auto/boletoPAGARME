@@ -1899,51 +1899,7 @@
         </div>
     </div>
 
-    <!-- Modal de Sucesso (Código Copiado) -->
-    <div class="pix-modal-overlay" id="pix-modal">
-        <div class="pix-modal-content">
-            <button class="btn-close-modal" id="btn-close-pix-modal-new">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="pix-modal-header">
-                <i class="fas fa-check-circle"></i>
-                <h2 class="pix-modal-title">Código Copiado!</h2>
-                <p class="pix-modal-subtitle">O código do boleto foi copiado para sua área de transferência.</p>
-            </div>
-            <div class="pix-modal-body">
-                <div class="pix-modal-info-row">
-                    <span class="pix-modal-info-label">Valor:</span>
-                    <span class="pix-modal-info-value" id="modal-pix-value">R$ 0,00</span>
-                </div>
-                <div class="pix-modal-info-row">
-                    <span class="pix-modal-info-label">Vencimento:</span>
-                    <span class="pix-modal-info-value">Hoje</span>
-                </div>
-                <div class="pix-modal-info-row" style="flex-direction: column; gap: 8px; border-bottom: none;">
-                    <span class="pix-modal-info-label" style="text-align: left;">Código do Boleto:</span>
-                    <div style="display: flex; gap: 8px; width: 100%;">
-                        <input type="text" id="modal-pix-code-input" readonly style="flex: 1; padding: 8px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: monospace; font-size: 12px; background: #fff;">
-                        <button id="btn-copy-modal-code" style="background: var(--primary); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer;"><i class="fas fa-copy"></i></button>
-                    </div>
-                </div>
-            </div>
-            <div class="pix-modal-steps">
-                <div class="pix-modal-step-item">
-                    <div class="pix-modal-step-number">1</div>
-                    <div class="pix-modal-step-text">Abra o app do seu banco ou carteira digital.</div>
-                </div>
-                <div class="pix-modal-step-item">
-                    <div class="pix-modal-step-number">2</div>
-                    <div class="pix-modal-step-text">Escolha a opção de pagar com <strong>Boleto</strong>.</div>
-                </div>
-                <div class="pix-modal-step-item">
-                    <div class="pix-modal-step-number">3</div>
-                    <div class="pix-modal-step-text">Cole o código e confirme o pagamento.</div>
-                </div>
-            </div>
-            <button class="btn-modal-continue" id="btn-modal-ok">Entendi</button>
-        </div>
-    </div>
+
 
     <!-- ORIGINAL PIX COPIED MODAL FROM pasted_content_3 -->
     <div class="pix-modal-overlay" id="pix-copied-modal">
@@ -2215,10 +2171,8 @@ function renderOrderSummary() {
                     document.getElementById('pix-code-text').innerText = data.pixCode; 
                     document.getElementById('pixCodeCopied').value = data.pixCode;
                     
-                    // Configura e abre o novo modal de sucesso
-                    document.getElementById('modal-pix-value').textContent = `R$ ${subtotalValue.toFixed(2).replace('.', ',')}`;
-                    document.getElementById('modal-pix-code-input').value = data.pixCode;
-                    document.getElementById('pix-modal').classList.add('active');
+                    // Abre o modal original "Código do Boleto Copiado!"
+                    document.getElementById('pix-copied-modal').classList.add('active');
                     
                     startTimer(15 * 60);
                 } else { 
@@ -2233,17 +2187,7 @@ function renderOrderSummary() {
             }
         }
 
-        // Eventos para os novos modais
-        document.getElementById('btn-modal-ok').onclick = () => document.getElementById('pix-modal').classList.remove('active');
-        document.getElementById('btn-close-pix-modal-new').onclick = () => document.getElementById('pix-modal').classList.remove('active');
-        document.getElementById('btn-copy-modal-code').onclick = () => {
-            const code = document.getElementById('modal-pix-code-input').value;
-            navigator.clipboard.writeText(code).then(() => {
-                const btn = document.getElementById('btn-copy-modal-code');
-                btn.innerHTML = '<i class="fas fa-check"></i>';
-                setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
-            });
-        };
+
 
         function startTimer(duration) {
             let timer = duration, minutes, seconds;
