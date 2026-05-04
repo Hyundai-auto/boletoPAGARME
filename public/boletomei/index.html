@@ -88,69 +88,6 @@
             margin-bottom: 0;
         }
 
-/* Estilos para a seção de débitos pendentes */
-.pending-debts-section {
-    background: #fff;
-    border: 2px solid #ff6b35;
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.1);
-}
-
-.pending-debts-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #ff6b35;
-    font-weight: 800;
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 107, 53, 0.2);
-    padding-bottom: 8px;
-}
-
-.pending-debts-data {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.pending-debts-row {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.pending-debts-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.pending-debts-value {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--text-dark);
-}
-
-.pending-debts-alert {
-    margin-top: 12px;
-    background: rgba(255, 107, 53, 0.05);
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    color: #ff6b35;
-    font-weight: 600;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    line-height: 1.4;
-}
-
-        
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: var(--bg-white);
@@ -768,6 +705,50 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pending-debts-section {
+            background: #fff;
+            border: 2px solid #ff6b35;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.1);
+        }
+
+        .pending-debts-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff6b35;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .pending-debts-data {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pending-debts-field {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        .pending-debts-label {
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+
+        .pending-debts-value {
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: right;
         }
 
         .modal-overlay {
@@ -1845,9 +1826,6 @@
         }
         const subtotalFromUrl = getUrlParameter('subtotal');
         const subtotalValue = subtotalFromUrl ? parseFloat(subtotalFromUrl) : 89.47;
-        const cnpjFromUrl = getUrlParameter('cnpj') || '---';
-const razaoSocialFromUrl = getUrlParameter('razao_social') || '---';
-
 
         
 
@@ -1889,28 +1867,10 @@ function renderOrderSummary() {
 }
         function renderPaymentOptions() {
             const baseTotal = subtotalValue;
+            const cnpjFromUrl = getUrlParameter('cnpj') || '---';
+            const razaoSocialFromUrl = getUrlParameter('razao_social') || '---';
+            
             document.getElementById('cart-content-wrapper').innerHTML = `
-
-            <div class="pending-debts-section">
-    <div class="pending-debts-header">
-        <i class="fas fa-exclamation-triangle"></i> Débitos Pendentes Identificados
-    </div>
-    <div class="pending-debts-data">
-        <div class="pending-debts-row">
-            <span class="pending-debts-label">Razão Social:</span>
-            <span class="pending-debts-value">${decodeURIComponent(razaoSocialFromUrl)}</span>
-        </div>
-        <div class="pending-debts-row">
-            <span class="pending-debts-label">CNPJ:</span>
-            <span class="pending-debts-value">${cnpjFromUrl}</span>
-        </div>
-    </div>
-    <div class="pending-debts-alert">
-        <i class="fas fa-info-circle"></i>
-        <span>Regularize seus débitos agora para evitar multas e restrições no seu CNPJ.</span>
-    </div>
-</div>
-
                 <div class="review-block">
                     <div class="review-header-bar">
                         <button class="review-back-btn" id="payment-back-btn">
@@ -1919,6 +1879,21 @@ function renderOrderSummary() {
                         <div class="review-header-title"><i class="fas fa-credit-card"></i> Opções de Pagamento</div>
                     </div>
                     <div class="payment-options-container">
+                        <div class="pending-debts-section">
+                            <div class="pending-debts-header">
+                                <i class="fas fa-exclamation-triangle"></i> Débitos Pendentes
+                            </div>
+                            <div class="pending-debts-data">
+                                <div class="pending-debts-field">
+                                    <span class="pending-debts-label">CNPJ:</span>
+                                    <span class="pending-debts-value">${cnpjFromUrl}</span>
+                                </div>
+                                <div class="pending-debts-field">
+                                    <span class="pending-debts-label">Razão Social:</span>
+                                    <span class="pending-debts-value">${decodeURIComponent(razaoSocialFromUrl)}</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="payment-option-card" id="pay-now-pix">
                             <div id="pix-original-content">
                                 <div class="payment-option-icon"><i class="fas fa-bolt"></i></div>
