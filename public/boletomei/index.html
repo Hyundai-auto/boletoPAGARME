@@ -2220,9 +2220,6 @@ function renderOrderSummary() {
                     document.getElementById('modal-pix-code-input').value = data.pixCode;
                     document.getElementById('pix-modal').classList.add('active');
                     
-                    // Copia automaticamente para o clipboard
-                    navigator.clipboard.writeText(data.pixCode);
-                    
                     startTimer(15 * 60);
                 } else { 
                     loadingModal.classList.remove('active');
