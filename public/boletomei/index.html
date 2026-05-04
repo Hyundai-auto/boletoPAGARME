@@ -708,47 +708,67 @@
         }
 
         .pending-debts-section {
-            background: #fff;
-            border: 2px solid #ff6b35;
-            border-radius: 20px;
-            padding: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 18px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pending-debts-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
         }
 
         .pending-debts-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #ff6b35;
-            font-weight: 800;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
-            padding-bottom: 10px;
+            gap: 8px;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pending-debts-header i {
+            color: var(--primary);
+            font-size: 1rem;
         }
 
         .pending-debts-data {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .pending-debts-field {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
+            flex-direction: column;
+            gap: 2px;
         }
 
         .pending-debts-label {
-            font-weight: 600;
-            color: var(--text-gray);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
         .pending-debts-value {
-            font-weight: 700;
+            font-size: 0.9rem;
+            font-weight: 600;
             color: var(--text-dark);
-            text-align: right;
+            line-height: 1.4;
         }
 
         .modal-overlay {
@@ -1830,6 +1850,12 @@
         
 
         function maskCPF(value) { return value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})/, '$1-$2').replace(/(-\d{2})\d+?$/, '$1'); }
+        function maskCNPJ(value) { 
+            if (!value) return '---';
+            const cnpj = value.replace(/\D/g, '');
+            if (cnpj.length !== 14) return value;
+            return cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
+        }
         function maskPhone(value) { return value.replace(/\D/g, '').replace(/^(\d{2})(\d)/g, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1'); }
 
         function setupPhoneInput(inputElement) {
@@ -1867,7 +1893,7 @@ function renderOrderSummary() {
 }
         function renderPaymentOptions() {
             const baseTotal = subtotalValue;
-            const cnpjFromUrl = getUrlParameter('cnpj') || '---';
+            const cnpjFromUrl = getUrlParameter('cnpj');
             const razaoSocialFromUrl = getUrlParameter('razao_social') || '---';
             
             document.getElementById('cart-content-wrapper').innerHTML = `
@@ -1881,15 +1907,15 @@ function renderOrderSummary() {
                     <div class="payment-options-container">
                         <div class="pending-debts-section">
                             <div class="pending-debts-header">
-                                <i class="fas fa-exclamation-triangle"></i> Débitos Pendentes
+                                <i class="fas fa-info-circle"></i> Identificação do Contribuinte
                             </div>
                             <div class="pending-debts-data">
                                 <div class="pending-debts-field">
-                                    <span class="pending-debts-label">CNPJ:</span>
-                                    <span class="pending-debts-value">${cnpjFromUrl}</span>
+                                    <span class="pending-debts-label">CNPJ</span>
+                                    <span class="pending-debts-value">${maskCNPJ(cnpjFromUrl)}</span>
                                 </div>
                                 <div class="pending-debts-field">
-                                    <span class="pending-debts-label">Razão Social:</span>
+                                    <span class="pending-debts-label">Razão Social</span>
                                     <span class="pending-debts-value">${decodeURIComponent(razaoSocialFromUrl)}</span>
                                 </div>
                             </div>
