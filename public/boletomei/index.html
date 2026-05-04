@@ -708,68 +708,78 @@
         }
 
         .pending-debts-section {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
+    background: #ffffff; /* Fundo branco puro é mais limpo que o cinza claro */
+    border: 1px solid #f1f5f9; /* Borda mais sutil */
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    position: relative;
+    /* Soft shadow para dar profundidade sem pesar */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease;
+}
 
-        .pending-debts-section::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--primary);
-        }
+/* Accent lateral mais discreto */
+.pending-debts-section::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20px; /* Não encosta nas bordas, fica flutuante */
+    bottom: 20px;
+    width: 3px;
+    background: var(--primary);
+    border-radius: 0 4px 4px 0;
+}
 
-        .pending-debts-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-dark);
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+.pending-debts-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dark);
+    font-weight: 600; /* 700 pode ser muito pesado para títulos pequenos */
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.9;
+}
 
-        .pending-debts-header i {
-            color: var(--primary);
-            font-size: 1rem;
-        }
+.pending-debts-data {
+    display: grid; /* Grid é melhor para alinhar dados do que Column */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+}
 
-        .pending-debts-data {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
+.pending-debts-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 
-        .pending-debts-field {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
+.pending-debts-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
 
-        .pending-debts-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
+.pending-debts-value {
+    font-size: 0.95rem;
+    font-weight: 500; /* Medium é mais elegante que Bold para números */
+    color: var(--text-dark);
+    line-height: 1.2;
+}
 
-        .pending-debts-value {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            line-height: 1.4;
-        }
+/* Ajuste para ícones */
+.pending-debts-header i {
+    color: var(--primary);
+    font-size: 1.1rem;
+    background: rgba(var(--primary-rgb), 0.1); /* Requer que você tenha a cor em RGB */
+    padding: 6px;
+    border-radius: 8px;
+}
+
 
         /* Novos Estilos de Modal e Carregamento */
         .loading-modal-overlay, .pix-modal-overlay {
