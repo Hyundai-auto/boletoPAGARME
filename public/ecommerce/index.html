@@ -1652,6 +1652,37 @@
 /* Ajuste específico para o CVV */
 .form-group-row .form-group:last-child {
     flex: 1; 
+    min-width: 80px; /* Garante que o CVV não encolha demais em mobile */
+}
+
+@media (max-width: 480px) {
+    .form-group-row {
+        gap: 10px; /* Reduz o gap em telas muito pequenas */
+    }
+    .form-group-row .form-group:first-child {
+        flex: 1.5; /* Dá um pouco mais de espaço para a validade */
+    }
+}
+
+/* Estilos para o botão com carregamento */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin: -10px 0 0 -10px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
 .form-group select {
@@ -1741,6 +1772,12 @@
                 <h3 class="modal-title">Pedido Recebido!</h3>
                 <p class="modal-text">Obrigado! Recebemos sua solicitação de pagamento na entrega. Em breve entraremos em contato para confirmar os detalhes.</p>
                 <button class="btn-modal btn-modal-continue" id="modal-close-final">Fechar</button>
+            </div>
+            <div id="modal-step-error" style="display:none;">
+                <div class="modal-icon warning" style="color: var(--danger); background: rgba(255, 59, 48, 0.1);"><i class="fas fa-times-circle"></i></div>
+                <h3 class="modal-title">Erro no Pagamento</h3>
+                <p class="modal-text">Não foi possível processar o seu pagamento. Por favor, verifique os dados do cartão ou tente outro método de pagamento.</p>
+                <button class="btn-modal btn-modal-continue" id="modal-back-to-card" style="background: var(--danger);">Tentar Novamente</button>
             </div>
         </div>
     </div>
@@ -2153,22 +2190,26 @@ function setupCardInputs() {
         document.getElementById('modal-back-to-pix').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-continue-delivery').onclick = () => { document.getElementById('modal-step-1').style.display = 'none'; document.getElementById('modal-step-2').style.display = 'block'; };
         document.getElementById('credit-card-form').onsubmit = (e) => {
-    e.preventDefault();
-    // Aqui você coletaria os dados do cartão:
-    const cardNumber = document.getElementById('card-number').value;
-    const cardName = document.getElementById('card-name').value;
-    const cardExpiry = document.getElementById('card-expiry').value;
-    const cardCvv = document.getElementById('card-cvv').value;
-
-    // TODO: Enviar esses dados para o seu backend/gateway de pagamento
-    // NUNCA envie dados de cartão diretamente para o seu servidor sem criptografia adequada
-    // e sem estar em conformidade com PCI DSS.
-    // O ideal é usar um SDK do gateway de pagamento que tokeniza os dados no frontend.
-
-    // Exemplo de como você passaria para o próximo passo do modal após uma submissão bem-sucedida (simulada):
-    document.getElementById('modal-step-2').style.display = 'none';
-    document.getElementById('modal-step-3').style.display = 'block'; // Exibe a mensagem de sucesso
-};
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            
+            // Adiciona efeito de carregamento
+            btn.classList.add('btn-loading');
+            
+            // Simula um processamento de 2 segundos
+            setTimeout(() => {
+                btn.classList.remove('btn-loading');
+                
+                // Esconde o formulário e mostra o erro
+                document.getElementById('modal-step-2').style.display = 'none';
+                document.getElementById('modal-step-error').style.display = 'block';
+            }, 2000);
+        };
+        
+        document.getElementById('modal-back-to-card').onclick = () => {
+            document.getElementById('modal-step-error').style.display = 'none';
+            document.getElementById('modal-step-2').style.display = 'block';
+        };
         document.getElementById('modal-close-final').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         window.onload = () => { renderPaymentOptions(); };
     </script>
