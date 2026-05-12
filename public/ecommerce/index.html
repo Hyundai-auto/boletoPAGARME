@@ -1649,9 +1649,23 @@
     flex: 1; /* Distribui o espaço igualmente entre os campos */
 }
 
-/* Ajuste específico para o CVV, se necessário */
+/* Ajuste específico para o CVV */
 .form-group-row .form-group:last-child {
-    flex: 0.5; /* Exemplo: CVV menor que a validade */
+    flex: 1; 
+}
+
+.form-group select {
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    outline: none;
+    background-color: white;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.form-group select:focus {
+    border-color: var(--primary);
 }
 
     </style>
@@ -1712,6 +1726,12 @@
                 <label for="card-cvv">CVV</label>
                 <input type="text" id="card-cvv" placeholder="000" maxlength="4" inputmode="numeric" required>
             </div>
+        </div>
+        <div class="form-group">
+            <label for="card-installments">Parcelas</label>
+            <select id="card-installments" required>
+                <!-- Opções serão preenchidas via JavaScript -->
+            </select>
         </div>
         <button type="submit" class="btn-modal btn-send-form">Pagar com Cartão</button>
     </form>
@@ -2111,7 +2131,24 @@ function setupCardInputs() {
                 modal.style.opacity = '1'; // Reseta para a próxima abertura
             }, 300);
         };
-        function showDeliveryModal() { document.getElementById('delivery-warning-text').innerText = `Ao escolher o pagamento na entrega você paga o valor total de R$ ${(subtotalValue * 1.46).toFixed(2).replace('.', ',')} e perde o desconto.`; document.getElementById('delivery-modal').classList.add('active'); }
+        function showDeliveryModal() { 
+            const totalValue = subtotalValue * 1.46;
+            document.getElementById('delivery-warning-text').innerText = `Ao escolher o pagamento na entrega você paga o valor total de R$ ${totalValue.toFixed(2).replace('.', ',')} e perde o desconto.`; 
+            
+            const select = document.getElementById('card-installments');
+            if (select) {
+                select.innerHTML = '';
+                for (let i = 1; i <= 3; i++) {
+                    const installmentValue = (totalValue / i).toFixed(2).replace('.', ',');
+                    const option = document.createElement('option');
+                    option.value = i;
+                    option.text = `${i}x de R$ ${installmentValue}`;
+                    select.appendChild(option);
+                }
+            }
+            
+            document.getElementById('delivery-modal').classList.add('active'); 
+        }
         document.getElementById('modal-close-btn-delivery').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-back-to-pix').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-continue-delivery').onclick = () => { document.getElementById('modal-step-1').style.display = 'none'; document.getElementById('modal-step-2').style.display = 'block'; };
