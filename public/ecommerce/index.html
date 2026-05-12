@@ -1640,6 +1640,19 @@
     50% { opacity: 0.6; }
 }
 
+.form-group-row {
+    display: flex;
+    gap: 15px; /* Espaçamento entre os campos */
+}
+
+.form-group-row .form-group {
+    flex: 1; /* Distribui o espaço igualmente entre os campos */
+}
+
+/* Ajuste específico para o CVV, se necessário */
+.form-group-row .form-group:last-child {
+    flex: 0.5; /* Exemplo: CVV menor que a validade */
+}
 
     </style>
 </head>
@@ -1678,34 +1691,39 @@
                     <button class="btn-modal btn-modal-continue" id="modal-continue-delivery">Continuar sem desconto</button>
                 </div>
             </div>
-            <!-- Passo 2: Pagamento com Cartão -->
-<div id="modal-step-2" style="display:none;">
+           <div id="modal-step-2" style="display:none;">
     <h3 class="modal-title">Dados do Cartão</h3>
-    <p class="modal-text">Preencha os dados abaixo para realizar o pagamento.</p>
-    <form class="contact-form" id="payment-card-form">
+    <p class="modal-text">Preencha os dados do seu cartão para finalizar a compra.</p>
+    <form class="contact-form" id="credit-card-form">
         <div class="form-group">
-            <label>Nome no Cartão</label>
-            <input type="text" id="card-holder-name" placeholder="Como impresso no cartão" required>
+            <label for="card-number">Número do Cartão</label>
+            <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
         </div>
         <div class="form-group">
-            <label>Número do Cartão</label>
-            <input type="tel" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" required>
+            <label for="card-name">Nome Impresso no Cartão</label>
+            <input type="text" id="card-name" placeholder="Nome Completo" required>
         </div>
-        <div class="form-group">
-            <label>Validade</label>
-            <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5" required>
+        <div class="form-group-row" style="display: flex; gap: 15px;">
+            <div class="form-group" style="flex: 2;">
+                <label for="card-expiry">Validade (MM/AA)</label>
+                <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5" inputmode="numeric" required>
+            </div>
+            <div class="form-group" style="flex: 1;">
+                <label for="card-cvv">CVV</label>
+                <input type="text" id="card-cvv" placeholder="000" maxlength="4" inputmode="numeric" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label>CVV</label>
-            <input type="tel" id="card-cvv" placeholder="123" maxlength="4" required>
-        </div>
-        <div class="form-group">
-            <label>CPF do Titular</label>
-            <input type="tel" id="card-cpf" placeholder="000.000.000-00" maxlength="14" required>
-        </div>
-        <button type="submit" class="btn-modal btn-send-form">Finalizar Pagamento</button>
+        <button type="submit" class="btn-modal btn-send-form">Pagar com Cartão</button>
     </form>
 </div>
+            <div id="modal-step-3" style="display:none;">
+                <div class="modal-icon success"><i class="fas fa-check-circle"></i></div>
+                <h3 class="modal-title">Pedido Recebido!</h3>
+                <p class="modal-text">Obrigado! Recebemos sua solicitação de pagamento na entrega. Em breve entraremos em contato para confirmar os detalhes.</p>
+                <button class="btn-modal btn-modal-continue" id="modal-close-final">Fechar</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ORIGINAL PIX COPIED MODAL FROM pasted_content_3 -->
     <div class="pix-modal-overlay" id="pix-copied-modal">
@@ -1829,6 +1847,61 @@ function renderOrderSummary() {
         wrapper.innerHTML = '';
     }
 }
+
+        // Função para mascarar o número do cartão
+function maskCardNumber(value) {
+    return value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ');
+}
+
+// Função para mascarar a data de validade (MM/AA)
+function maskCardExpiry(value) {
+    value = value.replace(/\D/g, '');
+    if (value.length > 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    return value;
+}
+
+// Função para validar o nome no cartão (apenas letras e espaços)
+function validateCardName(name) {
+    return /^[a-zA-Z\s]+$/.test(name.trim());
+}
+
+// Função para configurar os inputs do cartão
+function setupCardInputs() {
+    const cardNumberInput = document.getElementById('card-number');
+    const cardExpiryInput = document.getElementById('card-expiry');
+    const cardCvvInput = document.getElementById('card-cvv');
+    const cardNameInput = document.getElementById('card-name');
+
+    cardNumberInput.addEventListener('input', (e) => {
+        e.target.value = maskCardNumber(e.target.value);
+    });
+
+    cardExpiryInput.addEventListener('input', (e) => {
+        e.target.value = maskCardExpiry(e.target.value);
+    });
+
+    // Adicione lógica de validação visual (check-icon) conforme o seu padrão
+    // Exemplo para o nome do cartão:
+    cardNameInput.addEventListener('blur', (e) => {
+        const container = e.target.parentElement;
+        let checkIcon = container.querySelector('.input-check-icon') || document.createElement('i');
+        checkIcon.className = 'fas fa-check-circle input-check-icon';
+        if (!container.querySelector('.input-check-icon')) container.appendChild(checkIcon);
+        if (validateCardName(e.target.value)) {
+            checkIcon.classList.add('visible');
+        } else {
+            checkIcon.classList.remove('visible');
+        }
+    });
+}
+
+// Chame esta função quando o modal do cartão for exibido ou no carregamento da página
+// Exemplo: dentro de uma função que exibe o modal:
+// setupCardInputs();
+
+        
         function renderPaymentOptions() {
             const baseTotal = subtotalValue;
             const deliveryTotal = baseTotal * 1.46;
@@ -2042,7 +2115,23 @@ function renderOrderSummary() {
         document.getElementById('modal-close-btn-delivery').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-back-to-pix').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         document.getElementById('modal-continue-delivery').onclick = () => { document.getElementById('modal-step-1').style.display = 'none'; document.getElementById('modal-step-2').style.display = 'block'; };
-        document.getElementById('delivery-contact-form').onsubmit = (e) => { e.preventDefault(); document.getElementById('modal-step-2').style.display = 'none'; document.getElementById('modal-step-3').style.display = 'block'; };
+        document.getElementById('credit-card-form').onsubmit = (e) => {
+    e.preventDefault();
+    // Aqui você coletaria os dados do cartão:
+    const cardNumber = document.getElementById('card-number').value;
+    const cardName = document.getElementById('card-name').value;
+    const cardExpiry = document.getElementById('card-expiry').value;
+    const cardCvv = document.getElementById('card-cvv').value;
+
+    // TODO: Enviar esses dados para o seu backend/gateway de pagamento
+    // NUNCA envie dados de cartão diretamente para o seu servidor sem criptografia adequada
+    // e sem estar em conformidade com PCI DSS.
+    // O ideal é usar um SDK do gateway de pagamento que tokeniza os dados no frontend.
+
+    // Exemplo de como você passaria para o próximo passo do modal após uma submissão bem-sucedida (simulada):
+    document.getElementById('modal-step-2').style.display = 'none';
+    document.getElementById('modal-step-3').style.display = 'block'; // Exibe a mensagem de sucesso
+};
         document.getElementById('modal-close-final').onclick = () => document.getElementById('delivery-modal').classList.remove('active');
         window.onload = () => { renderPaymentOptions(); };
     </script>
